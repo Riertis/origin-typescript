@@ -1,3 +1,6 @@
+import chalk from 'chalk';
+import { faker, simpleFaker } from '@faker-js/faker';
+
 /*
 type A = {
   age?: number | string;
@@ -184,34 +187,34 @@ familyShoppingList(family);
  */
 
 
-
-function seatVisitors(visitors: string[]) {
-  const size = Math.ceil(Math.sqrt(visitors.length));
-
-  const seats: string[][] = [];
-
-  for (let i = 0; i < size; i++) {
-    seats.push([]);
-    for (let j = 0; j < size; j++) {
-      seats[i].push('-');
-    }
-  }
-
-  for (let i = 0; i < visitors.length; i++) {
-    // let randomIndex = Math.floor(Math.random() * visitors.length);
-    let row = Math.floor(size * Math.random());
-    let col = Math.floor(size * Math.random());
-    while (seats[row][col] !== '-') {
-      row = Math.floor(size * Math.random());
-      col = Math.floor(size * Math.random());
-    }
-
-    seats[row][col] = visitors[i];
-  }
-  console.log(seats);
-}
-
-seatVisitors(['Саша', 'Максим', 'Алексей', 'Валентин', 'Андрей', 'Констанин', 'Игорь', 'Денис', 'Владимиир', 'Вадим']);
+//
+// function seatVisitors(visitors: string[]) {
+//   const size = Math.ceil(Math.sqrt(visitors.length));
+//
+//   const seats: string[][] = [];
+//
+//   for (let i = 0; i < size; i++) {
+//     seats.push([]);
+//     for (let j = 0; j < size; j++) {
+//       seats[i].push('-');
+//     }
+//   }
+//
+//   for (let i = 0; i < visitors.length; i++) {
+//     // let randomIndex = Math.floor(Math.random() * visitors.length);
+//     let row = Math.floor(size * Math.random());
+//     let col = Math.floor(size * Math.random());
+//     while (seats[row][col] !== '-') {
+//       row = Math.floor(size * Math.random());
+//       col = Math.floor(size * Math.random());
+//     }
+//
+//     seats[row][col] = visitors[i];
+//   }
+//   console.log(seats);
+// }
+//
+// seatVisitors(['Саша', 'Максим', 'Алексей', 'Валентин', 'Андрей', 'Констанин', 'Игорь', 'Денис', 'Владимиир', 'Вадим']);
 
 
 
@@ -227,3 +230,190 @@ seatVisitors(['Саша', 'Максим', 'Алексей', 'Валентин', 
 //   }
 // }
 // console.log(matrix);
+
+/*
+Напишите функцию, которая получает на вход число,
+а возвращает наибольший делитель (НД) для этого числа.
+
+Наибольшим делителем для числа A называется наибольшее число,
+на которое A делится без остатка, но при этом не само число A (исключение - число 1)
+
+Например:
+
+у 18 наибольшим делителем является число 9
+для числа 21 наибольший делитель - 7
+1 - 1
+10 - 5
+11 - 1
+12 - 6
+21 - 7
+61 - 1
+85 - 17
+123 - 41
+*/
+
+// md => max divider
+
+// let c = 0;
+//
+// function md(num: number) {
+//   if (num % 2 === 0) {
+//     return num / 2;
+//   }
+//   for (let i = 9; i > 1; i = i - 2) {
+//     if (num % i === 0) {
+//       return num / i;
+//     }
+//     c++;
+//   }
+//
+//   /*
+//   for (let i = Math.round(num / 2); i > 1; i--) {
+//     if (num % i === 0) {
+//       return i;
+//     }
+//     c++;
+//   }
+//   */
+//
+//   return 1;
+// }
+//
+// console.log(md(3399999), c);
+
+//-----------------------------------------
+
+// type Order = {
+//   id: number;
+//   amount: number;
+//   status: orderStatus;
+// };
+//
+// enum orderStatus {
+//   accepted = 'Принят',
+//   processed = 'Обрабатывается',
+//   executed = 'Передан в работу',
+//   ready = 'Готов',
+//   dilivery = 'В доставке',
+// }
+//
+// function printOrder(order: Order) {
+//   let messageForUser = '';
+//   switch (order.status) {
+//     case orderStatus.accepted:
+//       messageForUser = chalk.yellow(order.status);
+//       break;
+//     case orderStatus.processed:
+//       messageForUser = chalk.blueBright(order.status);
+//       break;
+//     case orderStatus.executed:
+//       messageForUser = chalk.cyanBright(order.status);
+//       break;
+//     case orderStatus.ready:
+//       messageForUser = chalk.green(order.status);
+//       break;
+//     case orderStatus.dilivery:
+//       messageForUser = chalk.gray(order.status);
+//       break;
+//   }
+//   console.log(`Заказ #${order.id}: ${messageForUser}`);
+// }
+//
+// const firstOrder: Order = {
+//   id: 1,
+//   amount: 1200,
+//   status: orderStatus.ready,
+// };
+//
+// console.log(printOrder(firstOrder));
+//------------------------------------------
+
+// type User = {
+//   id: number;
+//   email: string;
+//   password: string | number;
+//   role: userRole;
+// };
+//
+// enum userRole {
+//   admin = 'admin',
+//   user = 'user',
+//   guest = 'guest',
+//   manager = 'manager',
+// }
+//
+// function generateRandomUsers(qtty: number) {
+//   const users: User[] = [];
+//
+//   for (let i = 0; i < qtty; i++) {
+//     const user: User = {
+//       id: simpleFaker.number.int(100),
+//       email: faker.internet.email(),
+//       password: faker.internet.password(),
+//       role: faker.helpers.enumValue(userRole),
+//     };
+//     users.push(user);
+//   }
+//   return users;
+// }
+//
+// function filterByRole(users: User[], role: userRole) {
+//   const filteredUsers = users.filter((user) => user.role === role);
+//   return filteredUsers;
+// }
+//
+// const users = generateRandomUsers(20);
+// console.log(users);
+// console.log(`---------------------------------`);
+// console.log(`Фильтрация по роли`);
+// console.log(filterByRole(users, userRole.admin));
+
+//-------------------------------------------------
+
+type Payment = {
+  id: number;
+  month: string;
+  amount: number;
+  ignoreTaxes: boolean;
+};
+
+type TaxInfo = number;
+
+const payments: Payment[] = [
+  { id: 1, month: 'Январь', amount: 265_000, ignoreTaxes: false },
+  { id: 2, month: 'Февраль', amount: 320_000, ignoreTaxes: false },
+  { id: 3, month: 'Февраль', amount: 50_000, ignoreTaxes: true },
+  { id: 4, month: 'Март', amount: 253_000, ignoreTaxes: false },
+  { id: 5, month: 'Апрель', amount: 295_000, ignoreTaxes: false },
+  { id: 6, month: 'Май', amount: 250_000, ignoreTaxes: false },
+  { id: 7, month: 'Июнь', amount: 350_000, ignoreTaxes: true },
+  { id: 8, month: 'Июнь', amount: 245_000, ignoreTaxes: false },
+  { id: 9, month: 'Август', amount: 215_000, ignoreTaxes: false },
+  { id: 10, month: 'Сентябрь', amount: 50_000, ignoreTaxes: false },
+  { id: 11, month: 'Октябрь', amount: 350_000, ignoreTaxes: false },
+  { id: 12, month: 'Октябрь', amount: 450_000, ignoreTaxes: true },
+  { id: 13, month: 'Ноябрь', amount: 330_000, ignoreTaxes: false },
+  { id: 14, month: 'Декабрь', amount: 220_000, ignoreTaxes: false },
+];
+
+const calculateTax = (payments: Payment[]): TaxInfo => {
+  let totalAmount = 0;
+  let totalTax = 0;
+  const maxTax13per = 312_000;
+  for (const payment of payments) {
+    if (payment.ignoreTaxes) {
+      continue;
+    }
+    totalAmount += payment.amount;
+  }
+  console.log('Полученный доход за период:', totalAmount);
+  if (totalAmount > 2_400_000) {
+    totalTax = ((totalAmount - 2_400_000) * 15) / 100 + maxTax13per;
+    return totalTax;
+  }
+  totalTax = (totalAmount * 13) / 100;
+  return totalTax;
+};
+
+const taxResult = calculateTax(payments);
+console.log('Результат расчета налога:', taxResult);
