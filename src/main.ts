@@ -552,17 +552,17 @@ const jason = {
 };
 
 function showInfo(user: Record<string, number | string>) {
-  const defaultValue = 'Не указано';
+  const emptyPlaceholder = 'Не указано';
   const defaultPhotoLink = 'https://photos.com/photo.jpg';
   const parseAge = typeof user.age === 'string' ? parseFloat(user.age) : user.age;
   const ageCheck: string = parseAge < 18 ? 'Нет' : 'Да';
   const {
     name,
     surname,
-    partronymic = defaultValue,
+    partronymic = emptyPlaceholder,
     age,
     adult = ageCheck,
-    gender = defaultValue,
+    gender = emptyPlaceholder,
     photo = defaultPhotoLink,
   } = user;
 
