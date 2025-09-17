@@ -169,23 +169,20 @@ familyShoppingList(family);
 если посетителей будет 727867323834576 - ваша функция должна будет выбрать зал (матрицу) 26979017x26979017 и рассадить их в этом зале.
 
 Если всего 1 билет куплен - seatVisitors(['Саша']) вывод будет такой:
-[ [ 'Саша' ] ]
+[['Саша']]
 
 
 Например, для seatVisitors(['Саша', 'Максим']) может быть такой вывод:
 [
-  [ '-', 'Максим' ],
-  [ 'Саша', '-' ]
+  ['-', 'Максим'],
+  ['Саша', '-']
 ]
 
 А для seatVisitors(['Саша', 'Максим', 'Алексей', 'Валентин', 'Андрей']) может быть такой вывод:
-[
-  [ '-', 'Саша', '-' ],
-  [ '-', 'Алексей', 'Максим' ],
-  [ 'Андрей', 'Валентин', '-' ]
-]
+[['-', 'Саша', '-'],
+  ['-', 'Алексей', 'Максим'],
+  ['Андрей', 'Валентин', '-']]
  */
-
 
 //
 // function seatVisitors(visitors: string[]) {
@@ -215,9 +212,6 @@ familyShoppingList(family);
 // }
 //
 // seatVisitors(['Саша', 'Максим', 'Алексей', 'Валентин', 'Андрей', 'Констанин', 'Игорь', 'Денис', 'Владимиир', 'Вадим']);
-
-
-
 
 // const matrix: string[][] = [];
 // const size = 2;
@@ -370,50 +364,241 @@ familyShoppingList(family);
 
 //-------------------------------------------------
 
-type Payment = {
-  id: number;
-  month: string;
-  amount: number;
-  ignoreTaxes: boolean;
+// type Payment = {
+//   id: number;
+//   month: string;
+//   amount: number;
+//   ignoreTaxes: boolean;
+// };
+//
+// type TaxInfo = number;
+//
+// const payments: Payment[] = [
+//   { id: 1, month: 'Январь', amount: 265_000, ignoreTaxes: false },
+//   { id: 2, month: 'Февраль', amount: 320_000, ignoreTaxes: false },
+//   { id: 3, month: 'Февраль', amount: 50_000, ignoreTaxes: true },
+//   { id: 4, month: 'Март', amount: 253_000, ignoreTaxes: false },
+//   { id: 5, month: 'Апрель', amount: 295_000, ignoreTaxes: false },
+//   { id: 6, month: 'Май', amount: 250_000, ignoreTaxes: false },
+//   { id: 7, month: 'Июнь', amount: 350_000, ignoreTaxes: true },
+//   { id: 8, month: 'Июнь', amount: 245_000, ignoreTaxes: false },
+//   { id: 9, month: 'Август', amount: 215_000, ignoreTaxes: false },
+//   { id: 10, month: 'Сентябрь', amount: 50_000, ignoreTaxes: false },
+//   { id: 11, month: 'Октябрь', amount: 350_000, ignoreTaxes: false },
+//   { id: 12, month: 'Октябрь', amount: 450_000, ignoreTaxes: true },
+//   { id: 13, month: 'Ноябрь', amount: 330_000, ignoreTaxes: false },
+//   { id: 14, month: 'Декабрь', amount: 220_000, ignoreTaxes: false },
+// ];
+//
+// const calculateTax = (payments: Payment[]): TaxInfo => {
+//   let totalAmount = 0;
+//   let totalTax = 0;
+//   const maxTax13per = 312_000;
+//   for (const payment of payments) {
+//     if (payment.ignoreTaxes) {
+//       continue;
+//     }
+//     totalAmount += payment.amount;
+//   }
+//   console.log('Полученный доход за период:', totalAmount);
+//   if (totalAmount > 2_400_000) {
+//     totalTax = ((totalAmount - 2_400_000) * 15) / 100 + maxTax13per;
+//     return totalTax;
+//   }
+//   totalTax = (totalAmount * 13) / 100;
+//   return totalTax;
+// };
+//
+// const taxResult = calculateTax(payments);
+// console.log('Результат расчета налога:', taxResult);
+
+//------------Деструктуризация------------------
+
+// type User = {
+//   name: string;
+//   age: number;
+// };
+//
+// type Diplom = {
+//   degree: string;
+//   university: string;
+//   department: string;
+// };
+//
+// const user: User = { name: 'Коля', age: 9 };
+// const diplom = { degree: 'Магистр', university: 'МГУ', department: 'Кафедра информационных технологий' };
+//
+// function mergeToNewObject(user: User, diplom: Diplom): object {
+//   return { ...user, ...diplom };
+// }
+//
+// const obj3 = mergeToNewObject(user, diplom);
+//
+// console.log(obj3);
+/*
+{
+  name: 'Коля',
+  age: 9,
+  degree: 'Магистр',
+  university: 'МГУ',
+  department: 'Кафедра информационных технологий'
+}
+ */
+//-------------------------------------------
+//
+// type User = {
+//   name: string;
+//   age: number;
+//   notes: string;
+// };
+//
+// type Work = {
+//   address: string;
+//   department: string;
+//   notes: string;
+// };
+//
+// const user = { name: 'Коля', age: 9, notes: 'Заметка от Коли!' };
+// const work = { address: 'Строительная 4', department: 'Шпаклёвщик', notes: 'Рабочая заметка' };
+//
+// function merge(user: User, work: Work, course?: number): object {
+//   return course ? { ...user, ...work } : { ...work, ...user };
+// }
+//
+// console.log(merge(user, work));
+// /* Обратите внимание на поле "notes" ⭐️
+// {
+//   address: 'Строительная 4',
+//   department: 'Шпаклёвщик',
+//   notes: 'Заметка от Коли!',
+//   name: 'Коля',
+//   age: 9
+// }
+//  */
+//
+// console.log(merge(user, work, 0));
+// /* Обратите внимание на поле "notes" ⭐️
+// {
+//   address: 'Строительная 4',
+//   department: 'Шпаклёвщик',
+//   notes: 'Заметка от Коли!',
+//   name: 'Коля',
+//   age: 9
+// }
+//  */
+//
+// console.log(merge(user, work, 1));
+// /* Обратите внимание на поле "notes" ⭐️
+// {
+//   name: 'Коля',
+//   age: 9,
+//   notes: 'Рабочая заметка',
+//   address: 'Строительная 4',
+//   department: 'Шпаклёвщик'
+// }
+//  */
+//-------------------------------
+
+// const report = (finalists: Array<string>) => {
+//   const [firstParticipant, secondParticipant, thirdParticipant, ...otherParticipants] = finalists;
+//   console.log(`Первое место: ${firstParticipant}`);
+//   console.log(`Второе место: ${secondParticipant}`);
+//   console.log(`Второе место: ${thirdParticipant}`);
+//   console.log(`Остальные участники:`, otherParticipants);
+// };
+//
+// report(['Александр', 'Михаил', 'Валентин', 'Сергей', 'Артур']);
+//----------------------------------
+/*
+Напишите функцию showInfo, которая принимает на вход объект пользователя и выводит в консоль его карточку:
+* Имя
+* Фамилия
+* Отчество
+* Возраст
+* Совершеннолетний или нет
+* Пол
+* Фото
+
+Поля - отчество, пол, фото являются опциональными, их может не быть в объекте.
+Если отчества или пола не указано - напишите "Не указано"
+Если фото нет - укажите фото по умолчанию "https://photos.com/default.jpg"
+
+Для работы с полями объекта, внутри функции используйте деструктуризацию и деструктуризацию со значением по умолчанию.
+ */
+
+// type User = {
+//   name: string;
+//   surname: string;
+//   partronymic?: string;
+//   age: number;
+//   adult: string;
+//   gender?: string;
+//   photo?: string;
+// };
+
+const ryan = {
+  name: 'Райан',
+  age: 28,
+  surname: 'Гослинг',
+  gender: 'Мужчина',
+  photo: 'https://photos.com/photo.jpg',
 };
 
-type TaxInfo = number;
-
-const payments: Payment[] = [
-  { id: 1, month: 'Январь', amount: 265_000, ignoreTaxes: false },
-  { id: 2, month: 'Февраль', amount: 320_000, ignoreTaxes: false },
-  { id: 3, month: 'Февраль', amount: 50_000, ignoreTaxes: true },
-  { id: 4, month: 'Март', amount: 253_000, ignoreTaxes: false },
-  { id: 5, month: 'Апрель', amount: 295_000, ignoreTaxes: false },
-  { id: 6, month: 'Май', amount: 250_000, ignoreTaxes: false },
-  { id: 7, month: 'Июнь', amount: 350_000, ignoreTaxes: true },
-  { id: 8, month: 'Июнь', amount: 245_000, ignoreTaxes: false },
-  { id: 9, month: 'Август', amount: 215_000, ignoreTaxes: false },
-  { id: 10, month: 'Сентябрь', amount: 50_000, ignoreTaxes: false },
-  { id: 11, month: 'Октябрь', amount: 350_000, ignoreTaxes: false },
-  { id: 12, month: 'Октябрь', amount: 450_000, ignoreTaxes: true },
-  { id: 13, month: 'Ноябрь', amount: 330_000, ignoreTaxes: false },
-  { id: 14, month: 'Декабрь', amount: 220_000, ignoreTaxes: false },
-];
-
-const calculateTax = (payments: Payment[]): TaxInfo => {
-  let totalAmount = 0;
-  let totalTax = 0;
-  const maxTax13per = 312_000;
-  for (const payment of payments) {
-    if (payment.ignoreTaxes) {
-      continue;
-    }
-    totalAmount += payment.amount;
-  }
-  console.log('Полученный доход за период:', totalAmount);
-  if (totalAmount > 2_400_000) {
-    totalTax = ((totalAmount - 2_400_000) * 15) / 100 + maxTax13per;
-    return totalTax;
-  }
-  totalTax = (totalAmount * 13) / 100;
-  return totalTax;
+const jason = {
+  name: 'Джейсон',
+  age: 5,
+  surname: 'Стетхем',
+  patronymic: 'Александрович',
 };
 
-const taxResult = calculateTax(payments);
-console.log('Результат расчета налога:', taxResult);
+function showInfo(user: Record<string, number | string>) {
+  const defaultValue = 'Не указано';
+  const defaultPhotoLink = 'https://photos.com/photo.jpg';
+  const parseAge = typeof user.age === 'string' ? parseFloat(user.age) : user.age;
+  const ageCheck: string = parseAge < 18 ? 'Нет' : 'Да';
+  const {
+    name,
+    surname,
+    partronymic = defaultValue,
+    age,
+    adult = ageCheck,
+    gender = defaultValue,
+    photo = defaultPhotoLink,
+  } = user;
+
+  console.log(`Карточка пользователя
+Имя : ${name}
+Фамилия : ${surname}
+Отчество : ${partronymic}
+Возраст : ${age}
+Совершеннолетний : ${adult}
+Пол : ${gender}
+Фото : ${photo}
+`);
+}
+
+showInfo(ryan);
+/*
+Карточка пользователя
+Имя: Райан
+Фамилия: Гослинг
+Отчество: Не указано
+Возраст: 28
+Совершеннолетний: Да
+Пол: Мужчина
+Фото: https://photos.com/photo.jpg
+
+ */
+
+showInfo(jason);
+/*
+Карточка пользователя
+Имя: Джейсон
+Фамилия: Стетхем
+Отчество: Александрович
+Возраст: 5
+Совершеннолетний: Нет
+Пол: Не указано
+Фото: https://photos.com/default.jpg
+
+ */
