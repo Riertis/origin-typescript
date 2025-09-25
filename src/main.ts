@@ -1,5 +1,7 @@
 import chalk from 'chalk';
 import { faker, simpleFaker } from '@faker-js/faker';
+import { fakerRU, ru } from '@faker-js/faker';
+import { log } from 'eslint-import-resolver-typescript/lib/logger';
 
 /*
 type A = {
@@ -525,80 +527,225 @@ familyShoppingList(family);
 
 Для работы с полями объекта, внутри функции используйте деструктуризацию и деструктуризацию со значением по умолчанию.
  */
-
+//
 // type User = {
 //   name: string;
 //   surname: string;
 //   partronymic?: string;
 //   age: number;
-//   adult: string;
 //   gender?: string;
 //   photo?: string;
 // };
+//
+// const ryan = {
+//   name: 'Райан',
+//   age: 28,
+//   surname: 'Гослинг',
+//   gender: 'Мужчина',
+//   photo: 'https://photos.com/photo.jpg',
+// };
+//
+// const jason = {
+//   name: 'Джейсон',
+//   age: 5,
+//   surname: 'Стетхем',
+//   patronymic: 'Александрович',
+// };
+//
+// function showInfo(user: User) {
+//   const emptyPlaceholder = 'Не указано';
+//   const defaultPhotoLink = 'https://photos.com/photo.jpg';
+//   // const parseAge = typeof user.age === 'string' ? parseFloat(user.age) : user.age;
+//   const ageCheck = user.age < 18 ? 'Нет' : 'Да';
+//   const {
+//     name,
+//     surname,
+//     partronymic = emptyPlaceholder,
+//     age,
+//     // adult = ageCheck,
+//     gender = emptyPlaceholder,
+//     photo = defaultPhotoLink,
+//   } = user;
+//
+//   console.log(`Карточка пользователя
+// Имя : ${name}
+// Фамилия : ${surname}
+// Отчество : ${partronymic}
+// Возраст : ${age}
+// Совершеннолетний : ${ageCheck}
+// Пол : ${gender}
+// Фото : ${photo}
+// `);
+// }
+//
+// showInfo(ryan);
+// /*
+// Карточка пользователя
+// Имя: Райан
+// Фамилия: Гослинг
+// Отчество: Не указано
+// Возраст: 28
+// Совершеннолетний: Да
+// Пол: Мужчина
+// Фото: https://photos.com/photo.jpg
+//
+//  */
+//
+// showInfo(jason);
+// /*
+// Карточка пользователя
+// Имя: Джейсон
+// Фамилия: Стетхем
+// Отчество: Александрович
+// Возраст: 5
+// Совершеннолетний: Нет
+// Пол: Не указано
+// Фото: https://photos.com/default.jpg
+//
+//  */
 
-const ryan = {
-  name: 'Райан',
-  age: 28,
-  surname: 'Гослинг',
-  gender: 'Мужчина',
-  photo: 'https://photos.com/photo.jpg',
+//------------операторы слияния------------
+
+// type Video = {
+//   id: number;
+//   name: string;
+//   subs?: string | null;
+// };
+//
+// const firstVideo: Video = {
+//   id: 1,
+//   name: 'Kotik',
+// };
+//
+// const secondVideo: Video = {
+//   id: 2,
+//   name: 'memes',
+//   subs: null,
+// };
+//
+// const thirdVideo: Video = {
+//   id: 3,
+//   name: 'stream',
+//   subs: '',
+// };
+//
+// const fourthVideo: Video = {
+//   id: 4,
+//   name: 'reals',
+//   subs: 'rus',
+// };
+//
+// const missingValue = 'Не обнаружено';
+// const emptyValue = 'Пусто';
+//
+// console.log(
+//   firstVideo.subs ?? missingValue,
+//   secondVideo.subs || missingValue,
+//   thirdVideo.subs || emptyValue,
+//   fourthVideo.subs,
+// );
+//--------------------------------------
+
+// const possibleTasks = ['Купить кота', 'Продать кота', 'Помыть кота', 'Купить арбуз'];
+//
+// type User = {
+//   id: string; // nanoid длиной 6 символов, используйте faker.string.nanoid
+//   name: string; // обязательно русское
+//   email: string;
+//   company: string; // название компании (использовать .company)
+//   tasks: string[]; // От 0 до 2х рандомных задач из массива possibleTasks (взять используя faker.helpers)
+// };
+// const qtyUsers = Math.floor(5 * Math.random() + 2);
+// const users: User[] = [];
+//
+// for (let i = 0; i < qtyUsers; i++) {
+//   const user: User = {
+//     id: faker.string.nanoid(5),
+//     name: fakerRU.person.fullName(),
+//     email: faker.internet.email(),
+//     company: fakerRU.company.name(),
+//     tasks: faker.helpers.arrayElements(possibleTasks, { min: 0, max: 2 }),
+//   };
+//   users.push(user);
+// }
+// // console.log(users);
+//
+// function taskCount(user: User) {
+//   const coloredGreenValue = (value: string) => {
+//     return chalk.green(`"${value}"`);
+//   };
+//   console.log(
+//     `Пользователь ${coloredGreenValue(user.name)} (id=${coloredGreenValue(user.id)}): ${user.tasks.length || 'Нет'} дел на сегодня`,
+//   );
+// }
+// for (const user of users) {
+//   taskCount(user);
+// }
+
+//------------------------------------
+
+type User = {
+  id: number;
+  name?: string;
+  email: string;
 };
 
-const jason = {
-  name: 'Джейсон',
-  age: 5,
-  surname: 'Стетхем',
-  patronymic: 'Александрович',
+type Item = {
+  id: number;
+  name: string;
+  price: number;
+  count?: number; // Если count не указан, по умолчанию считать количество 1
 };
 
-function showInfo(user: Record<string, number | string>) {
-  const emptyPlaceholder = 'Не указано';
-  const defaultPhotoLink = 'https://photos.com/photo.jpg';
-  const parseAge = typeof user.age === 'string' ? parseFloat(user.age) : user.age;
-  const ageCheck: string = parseAge < 18 ? 'Нет' : 'Да';
-  const {
-    name,
-    surname,
-    partronymic = emptyPlaceholder,
-    age,
-    adult = ageCheck,
-    gender = emptyPlaceholder,
-    photo = defaultPhotoLink,
-  } = user;
+type DiscountCard = {
+  id: number;
+  series: number;
+};
 
-  console.log(`Карточка пользователя
-Имя : ${name}
-Фамилия : ${surname}
-Отчество : ${partronymic}
-Возраст : ${age}
-Совершеннолетний : ${adult}
-Пол : ${gender}
-Фото : ${photo}
-`);
+type Order = {
+  id: number;
+  user: User | null;
+  card: DiscountCard | null;
+  items: Item[];
+};
+
+function printCheque(order: Order) {
+  const userInfo = order.user
+    ? `id: ${order.user.id}
+    имя: ${order.user.name || 'Не указано'}
+    email: ${order.user.email}`
+    : null;
+  console.log(`
+  Заказ #${order.id}
+  ------------
+  Клиент: 
+  ${userInfo || 'Не указан'}
+  `);
 }
 
-showInfo(ryan);
-/*
-Карточка пользователя
-Имя: Райан
-Фамилия: Гослинг
-Отчество: Не указано
-Возраст: 28
-Совершеннолетний: Да
-Пол: Мужчина
-Фото: https://photos.com/photo.jpg
+const order: Order = {
+  id: 3,
+  user: {
+    id: 5,
+    email: 'example@domain.com',
+  },
+  card: null,
+  items: [
+    { id: 6, name: 'Хлеб', price: 75, count: 3 },
+    { id: 9, name: 'Вафли', price: 95.9, count: 1 },
+    { id: 12, name: 'Набор конфет', price: 350 },
+  ],
+};
 
- */
+// const order: Order = {
+//   id: 3,
+//   user: null,
+//   card: null,
+//   items: [
+//     { id: 6, name: 'Хлеб', price: 75, count: 3 },
+//     { id: 9, name: 'Вафли', price: 95.9, count: 1 },
+//     { id: 12, name: 'Набор конфет', price: 350 },
+//   ],
+// };
 
-showInfo(jason);
-/*
-Карточка пользователя
-Имя: Джейсон
-Фамилия: Стетхем
-Отчество: Александрович
-Возраст: 5
-Совершеннолетний: Нет
-Пол: Не указано
-Фото: https://photos.com/default.jpg
-
- */
+printCheque(order);
