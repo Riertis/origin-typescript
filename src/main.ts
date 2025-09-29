@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import { faker, simpleFaker } from '@faker-js/faker';
 import { fakerRU, ru } from '@faker-js/faker';
 import { log } from 'eslint-import-resolver-typescript/lib/logger';
-
+import deepEqual from 'deep-equal';
 /*
 type A = {
   age?: number | string;
@@ -684,62 +684,51 @@ familyShoppingList(family);
 
 //------------------------------------
 
-type User = {
-  id: number;
-  name?: string;
-  email: string;
-};
-
-type Item = {
-  id: number;
-  name: string;
-  price: number;
-  count?: number; // Если count не указан, по умолчанию считать количество 1
-};
-
-type DiscountCard = {
-  id: number;
-  series: number;
-};
-
-type Order = {
-  id: number;
-  user: User | null;
-  card: DiscountCard | null;
-  items: Item[];
-};
-
-function printCheque(order: Order) {
-  const userInfo = order.user
-    ? `id: ${order.user.id}
-    имя: ${order.user.name || 'Не указано'}
-    email: ${order.user.email}`
-    : null;
-  console.log(`
-  Заказ #${order.id}
-  ------------
-  Клиент: 
-  ${userInfo || 'Не указан'}
-  `);
-}
-
-const order: Order = {
-  id: 3,
-  user: {
-    id: 5,
-    email: 'example@domain.com',
-  },
-  card: null,
-  items: [
-    { id: 6, name: 'Хлеб', price: 75, count: 3 },
-    { id: 9, name: 'Вафли', price: 95.9, count: 1 },
-    { id: 12, name: 'Набор конфет', price: 350 },
-  ],
-};
-
+// type User = {
+//   id: number;
+//   name?: string;
+//   email: string;
+// };
+//
+// type Item = {
+//   id: number;
+//   name: string;
+//   price: number;
+//   count?: number; // Если count не указан, по умолчанию считать количество 1
+// };
+//
+// type DiscountCard = {
+//   id: number;
+//   series: number;
+// };
+//
+// type Order = {
+//   id: number;
+//   user: User | null;
+//   card: DiscountCard | null;
+//   items: Item[];
+// };
+//
+// function printCheque(order: Order) {
+//   const userInfo = order.user
+//     ? `id: ${order.user.id}
+//     имя: ${order.user.name || 'Не указано'}
+//     email: ${order.user.email}`
+//     : null;
+//   console.log(`
+//   Заказ #${order.id}
+//   ------------
+//   Клиент:
+//   ${userInfo || 'Не указан'}
+//   `);
+// }
+//
 // const order: Order = {
 //   id: 3,
-//   user: null,
+//   user: {
+//     id: 5,
+//     email: 'example@domain.com',
+//   },
 //   card: null,
 //   items: [
 //     { id: 6, name: 'Хлеб', price: 75, count: 3 },
@@ -747,5 +736,112 @@ const order: Order = {
 //     { id: 12, name: 'Набор конфет', price: 350 },
 //   ],
 // };
+//
+// // const order: Order = {
+// //   id: 3,
+// //   user: null,
+// //   card: null,
+// //   items: [
+// //     { id: 6, name: 'Хлеб', price: 75, count: 3 },
+// //     { id: 9, name: 'Вафли', price: 95.9, count: 1 },
+// //     { id: 12, name: 'Набор конфет', price: 350 },
+// //   ],
+// // };
+//
+// printCheque(order);
 
-printCheque(order);
+
+
+/*
+Напишите функцию, которая принимает на вход текст и набор символов.
+И возвращает true/false - содержатся ли символы в любом порядке в полученном тексте
+
+Например, если символы - "abc", то тогда нужно проверить, нет ли в тексте таких сочетаний:
+abc
+acb
+bac
+bca
+cab
+cba
+
+
+*/
+
+/*
+Напишите функцию, которая принимает на вход текст и набор символов.
+И возвращает true/false - содержатся ли символы в любом порядке в полученном тексте
+
+Например, если символы - "abc", то тогда нужно проверить, нет ли в тексте таких сочетаний:
+abc
+acb
+bac
+bca
+cab
+cba
+
+
+*/
+
+// привет => {п:1, р:1, ...}
+const countChars = (text: string) => {
+  const resultCountChars: Record<string, number> = {};
+
+  for (const symbol of text) {
+    if (resultCountChars[symbol]) {
+      resultCountChars[symbol]++;
+    } else {
+      resultCountChars[symbol] = 1;
+    }
+  }
+  return resultCountChars;
+};
+
+// function isKeysEqual(obj1: Record<string, number>, obj2: Record<string, number>): boolean {
+//   const keys1 = Object.keys(obj1);
+//   const keys2 = Object.keys(obj2);
+//
+//   // if (keys1.length != keys2.length) {
+//   //   return false;
+//   // }
+//
+//   for (const key of keys1) {
+//     if (!keys2.includes(key)) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+
+const includes = (text: string, symbols: string) => {
+  const countSymbolsAsObject = countChars(symbols);
+  console.log(countSymbolsAsObject);
+  let partOfTextAsObjectWithCount: Record<string, number> = {};
+  for (let i = 0; i < (text.length - symbols.length || 1); i++) {
+    const partOfTextEqualLengthOfSymbols = text.slice(i, symbols.length + i);
+
+    partOfTextAsObjectWithCount = countChars(partOfTextEqualLengthOfSymbols);
+    if (deepEqual(countSymbolsAsObject, partOfTextAsObjectWithCount)) {
+      break;
+    }
+  }
+  console.log(partOfTextAsObjectWithCount);
+  console.log(deepEqual(countSymbolsAsObject, partOfTextAsObjectWithCount));
+};
+
+console.log(includes('example', 'pml')); // true, ищем 'pml' и находим 'mpl'
+console.log(includes('server', 'revers')); // true, ищем 'revers' и находим 'server'
+console.log(includes('automati', 'amtto')); // true, ищем 'amtto' и находим 'tomat'
+
+/*
+
+0. Используя ф-кцию countChars "анализируем" символы "pml" и получаем {p:1, m:1, l:1}
+1. Смотрим длину символов (напр 3 штуки для pml)
+2. Берем для начала первые 3 символа (напр exa из слова example)
+3. Используя ф-кцию countChars считаем сколько букв в exa и получаем ответ {e:1, x:1, a: 1}
+4. Используя ф-кцию compareObjects сравниваем {p:1, m:1, l:1} и {e:1, x:1, a: 1}, получаем false
+5. Идём дальше, двигаемся на 1 символ вправо и берет 2-4 символы - "xam"
+6. "Анализируем" с помощью countChars "xam" и получаем {x:1, a:1, m:1}, сравниваем - false
+7. Идём дальше - amp, это {a:1, m:1, p:1} - не подходит
+8. Дальше - mpl, это {m: 1, p: 1, l:1}, сравниваем с нужным {p:1, m:1, l:1} - найдено! true!
+
+*/
