@@ -1,3 +1,5 @@
+import chalk from 'chalk';
+import { fi } from '@faker-js/faker';
 /*
 type A = {
   age?: number | string;
@@ -705,41 +707,39 @@ familyShoppingList(family);
 // };
 //
 // function printCheque(order: Order) {
-//   const userInfo = order.user
-//     ? `id: ${order.user.id}
-//   имя: ${order.user.name || 'Не указано'}
-//   email: ${order.user.email}`
-//     : null;
+//   const separator = '-------------';
+//   const lines = [];
 //
-//   const discountCard = order.card
-//     ? `id: ${order.card.id}
-//   номер: ${order.card.series}`
-//     : null;
+//   lines.push(` Заказ #${order.id}`, separator, 'Клиент:');
 //
-//   function printList(purchaseList: Item[]) {
-//     console.log(`  Список покупок: `);
-//     let sumPrice = 0;
-//     let sumCount = 0;
-//     for (const item of purchaseList) {
-//       item.count = item.count ?? 1;
-//       console.log(`-${item.name} ${item.price}руб ${item.count}шт`);
-//       sumPrice += item.price * item.count;
-//       sumCount += item.count;
-//     }
-//     console.log(`  ------------
-//  Итого ${sumCount} позиций на ${sumPrice}руб`);
+//   if (!order.user) {
+//     lines.push('Не указан');
+//    } else {
+//     const { id, name = 'Не указано', email } = order.user;
+//     lines.push(`id: ${id}`, `имя: ${name}`, `email: ${email}`);
 //   }
 //
-//   console.log(`
-//   Заказ #${order.id}
-//   ------------
-//   Клиент:
-//   ${userInfo || 'Не указан'}
-//   ------------
-//   Скидочная карта:
-//   ${discountCard || 'Не применена'}
-//   ------------`);
-//   printList(order.items);
+//   lines.push(separator, `Скидочная карта: `);
+//   if (!order.card) {
+//     lines.push('Не применена');
+//    } else {
+//     const { id, series } = order.card;
+//     lines.push(`id: ${id}`, `номер: ${series}`);
+//   }
+//   lines.push(separator, `Список покупок:`);
+//
+//   let sumPrice = 0;
+//   let totalCount = 0;
+//   for (const item of order.items) {
+//     const { name, price, count = 1 } = item;
+//     lines.push(` - ${name} ${price}руб ${count}шт`);
+//
+//     sumPrice += price * count;
+//     totalCount += count;
+//   }
+//   lines.push(separator, `Итого ${totalCount} позиций на ${sumPrice}руб`);
+//
+//   console.log(lines.join('\n'));
 // }
 //
 // const order1: Order = {
@@ -875,11 +875,10 @@ cba
 //     if (array[i] > array[i + 1]) {
 //       return null;
 //     }
-//     let count = 1;
-//     while (array[i] + count !== array[i + 1]) {
-//       const missNumber = array[i] + count;
-//       missNumbers.push(missNumber);
-//       count++;
+//
+//     for (let j = array[i] + 1; j < array[i + 1]; j++) {
+//       missNumbers.push(j);
+//
 //     }
 //   }
 //   return missNumbers;
@@ -918,116 +917,125 @@ cba
 Вы должны повторить вывод программы так, как показано на скриншоте ниже.
  */
 //-------------------Снятие наличных------------
-/*
-type Card = {
-  no: string;
-  pin: number;
-  balance: number;
-  badTries: number;
-  active: boolean;
-};
 
-type CallbackFn = (msg: string) => void;
+// type Card = {
+//   no: string;
+//   pin: number;
+//   balance: number;
+//   badTries: number;
+//   active: boolean;
+// };
+//
+// type CallbackFn = (msg: string) => void;
+//
+// type WithDrawFn = (no: string, pin: number, balance: number, logGreen: CallbackFn, logRed: CallbackFn) => void;
+//
+// const database: Card[] = [
+//   { no: '4276 1234 5678 9101', pin: 1234, balance: 15000, badTries: 0, active: true },
+//   { no: '4214 5678 9101 1121', pin: 5678, balance: 23000, badTries: 0, active: true },
+//   { no: '4376 1111 2222 3333', pin: 4321, balance: 5000, badTries: 0, active: true },
+//   { no: '4276 4444 5555 6666', pin: 8765, balance: 12000, badTries: 0, active: true },
+//   { no: '4214 7777 8888 9999', pin: 1357, balance: 32000, badTries: 0, active: true },
+// ];
+//
+// const separator = () => console.log('----------------------\n');
+//
+// const logRed: CallbackFn = (msg: string) => {
+//   console.log(chalk.blue(new Date().toISOString()), chalk.magenta('ERROR'), chalk.red(msg));
+// };
+//
+// const logGreen: CallbackFn = (msg: string) => {
+//   console.log(chalk.blue(new Date().toISOString()), chalk.magenta('INFO'), chalk.green(msg));
+// };
+//
+// export const withdraw: WithDrawFn = (no, pin, amount, logGreen, logRed) => {
+//
+//   let card: Card | null = null;
+//   for (const cardDb of database) {
+//     if (cardDb.no === no) {
+//       card = cardDb;
+//       break;
+//     }
+//   }
+//
+//   if (!card) {
+//     logRed('Карта не поддерживается');
+//     return;
+//   }
+//
+//   if (!card.active) {
+//     logRed('Карта заблокирована!');
+//     return;
+//   }
+//
+//   if (card.pin !== pin) {
+//     logRed(card.badTries < 3 ? 'PIN не верный' : 'Карта заблокирована!')
+//     card.badTries += 1;
+//     card.active = card.badTries !== 3;
+//   } else {
+//     if (amount > card.balance) {
+//       logRed('Недостаточно средств');
+//       return;
+//     }
+//     card.balance -= amount;
+//     card.badTries = 0;
+//     logGreen(`Снятие наличных ${amount} руб. Баланс: ${card.balance} руб`);
+//   }
+// };
+//
+// // Проверка на реальное снятие баланса
+// console.log('Проверка на реальное снятие баланса');
+// withdraw('4276 1234 5678 9101', 1234, 14000, logGreen, logRed); // Снятие наличных 14000 руб. Баланс: 1000 руб
+// withdraw('4276 1234 5678 9101', 1234, 500, logGreen, logRed); // Снятие наличных 500 руб. Баланс: 500 руб
+// withdraw('4276 1234 5678 9101', 1234, 501, logGreen, logRed); // Недостаточно средств
+//
+// separator();
+//
+// // Проверка на несуществующую карту
+// console.log('Проверка на несуществующую карту');
+// withdraw('1111 2222 3333 4444', 1234, 501, logGreen, logRed); // Карта не обслуживается!
+//
+// separator();
+//
+// // Проверка, что карта блокируется после трех неправильных вводов PIN
+// console.log('Проверка, что карта блокируется после трех неправильных вводов PIN');
+// withdraw('4276 4444 5555 6666', 1111, 1, logGreen, logRed); // PIN неверный!
+// withdraw('4276 4444 5555 6666', 1111, 1, logGreen, logRed); // PIN неверный!
+// withdraw('4276 4444 5555 6666', 1111, 1, logGreen, logRed); // Карта заблокирована!
+// withdraw('4276 4444 5555 6666', 8765, 1, logGreen, logRed); // Карта не обслуживается!
+//
+// separator();
+//
+// // Проверка, что счётчик неправильных попыток сбрасывается после правильного PIN
+// console.log('Проверка, что счётчик неправильных попыток сбрасывается после правильного PIN');
+// const a = 16000;
+// withdraw('4214 7777 8888 9999', 1111, a, logGreen, logRed); // PIN неверный!
+// withdraw('4214 7777 8888 9999', 1111, a, logGreen, logRed); // PIN неверный!
+// withdraw('4214 7777 8888 9999', 1357, a, logGreen, logRed); // Снятие наличных 16000 руб. Баланс: 16000 руб
+// withdraw('4214 7777 8888 9999', 1111, a, logGreen, logRed); // PIN неверный!
+// withdraw('4214 7777 8888 9999', 1111, a, logGreen, logRed); // PIN неверный!
+// withdraw('4214 7777 8888 9999', 1357, a, logGreen, logRed); // Снятие наличных 16000 руб. Баланс: 0 руб
 
-type WithDrawFn = (no: string, pin: number, balance: number, logGreen: CallbackFn, logRed: CallbackFn) => void;
-
-const database: Card[] = [
-  { no: '4276 1234 5678 9101', pin: 1234, balance: 15000, badTries: 0, active: true },
-  { no: '4214 5678 9101 1121', pin: 5678, balance: 23000, badTries: 0, active: true },
-  { no: '4376 1111 2222 3333', pin: 4321, balance: 5000, badTries: 0, active: true },
-  { no: '4276 4444 5555 6666', pin: 8765, balance: 12000, badTries: 0, active: true },
-  { no: '4214 7777 8888 9999', pin: 1357, balance: 32000, badTries: 0, active: true },
-];
-
-const separator = () => console.log('----------------------\n');
-
-const logRed: CallbackFn = (msg: string) => {
-  console.log(chalk.blue(new Date().toISOString()), chalk.magenta('ERROR'), chalk.red(msg));
-};
-
-const logGreen: CallbackFn = (msg: string) => {
-  console.log(chalk.blue(new Date().toISOString()), chalk.magenta('INFO'), chalk.green(msg));
-};
-
-export const withdraw: WithDrawFn = (no, pin, balance, logGreen, logRed) => {
-  const numOfCards: Array<string> = database.map((numOfCard) => numOfCard.no);
-  if (!numOfCards.includes(no)) {
-    logRed('Карта не поддерживается');
-  }
-  for (const card of database) {
-    if (card.no === no) {
-      if (!card.active) {
-        logRed('Карта заблокирована!');
-        break;
-      }
-      if (card.pin !== pin) {
-        if (card.badTries < 2) {
-          logRed('PIN не верный');
-          card.badTries += 1;
-        } else {
-          logRed('Карта заблокирована!');
-          card.active = false;
-        }
-      } else {
-        if (balance > card.balance) {
-          logRed('Недостаточно средств');
-        } else {
-          card.balance -= balance;
-          card.badTries = 0;
-          logGreen(`Снятие наличных ${balance} руб. Баланс: ${card.balance} руб`);
-        }
-      }
-      break;
-    }
-  }
-};
-
-// Проверка на реальное снятие баланса
-console.log('Проверка на реальное снятие баланса');
-withdraw('4276 1234 5678 9101', 1234, 14000, logGreen, logRed); // Снятие наличных 14000 руб. Баланс: 1000 руб
-withdraw('4276 1234 5678 9101', 1234, 500, logGreen, logRed); // Снятие наличных 500 руб. Баланс: 500 руб
-withdraw('4276 1234 5678 9101', 1234, 501, logGreen, logRed); // Недостаточно средств
-
-separator();
-
-// Проверка на несуществующую карту
-console.log('Проверка на несуществующую карту');
-withdraw('1111 2222 3333 4444', 1234, 501, logGreen, logRed); // Карта не обслуживается!
-
-separator();
-
-// Проверка, что карта блокируется после трех неправильных вводов PIN
-console.log('Проверка, что карта блокируется после трех неправильных вводов PIN');
-withdraw('4276 4444 5555 6666', 1111, 1, logGreen, logRed); // PIN неверный!
-withdraw('4276 4444 5555 6666', 1111, 1, logGreen, logRed); // PIN неверный!
-withdraw('4276 4444 5555 6666', 1111, 1, logGreen, logRed); // Карта заблокирована!
-withdraw('4276 4444 5555 6666', 8765, 1, logGreen, logRed); // Карта не обслуживается!
-
-separator();
-
-// Проверка, что счётчик неправильных попыток сбрасывается после правильного PIN
-console.log('Проверка, что счётчик неправильных попыток сбрасывается после правильного PIN');
-const a = 16000;
-withdraw('4214 7777 8888 9999', 1111, a, logGreen, logRed); // PIN неверный!
-withdraw('4214 7777 8888 9999', 1111, a, logGreen, logRed); // PIN неверный!
-withdraw('4214 7777 8888 9999', 1357, a, logGreen, logRed); // Снятие наличных 16000 руб. Баланс: 16000 руб
-withdraw('4214 7777 8888 9999', 1111, a, logGreen, logRed); // PIN неверный!
-withdraw('4214 7777 8888 9999', 1111, a, logGreen, logRed); // PIN неверный!
-withdraw('4214 7777 8888 9999', 1357, a, logGreen, logRed); // Снятие наличных 16000 руб. Баланс: 0 руб
-*/
 //-----Самопроверка------
-/*
-const arrays = [
-  [1, 9, 9],
-  [2, 3, 6],
-  [5, 5, 25],
-  [8, 3, 24],
-  [0, 0, 0],
-];
 
-const multiply = (a: number, b: number) => a * b;
+// const arrays = [
+//   [1, 9, 9],
+//   [2, 3, 6],
+//   [5, 5, 25],
+//   [8, 3, 25],
+//   [0, 0, 0],
+// ];
+//
+// const multiply = (a: number, b: number) => a * b;
+//
+// function multiplyCheck(arrays: number[][]) {
+//   for (const testCase of arrays) {
+//     const [a, b, expectedResult] = testCase;
+//     const result = multiply(a, b) === expectedResult;
+//     console.log(result, `Умножение двух первых аргументов ${result ? '' : 'не'} равно третьему значению в массиве`);
+//   }
 
-function multiplyCheck(arrays: number[][]) {
+  /*
   for (let i = 0; i < arrays.length; i++) {
     if (multiply(arrays[i][0], arrays[i][1]) !== arrays[i][2]) {
       console.log(false, 'Умножение двух первых аргументов не равно третьему значению в массиве');
@@ -1035,11 +1043,11 @@ function multiplyCheck(arrays: number[][]) {
       console.log(true, 'Умножение двух первых аргументов равно третьему значению в массиве');
     }
   }
-
-}
-
-multiplyCheck(arrays);
 */
+// }
+//
+// multiplyCheck(arrays);
+
 
 //--------Время скачивания файлов-----------
 
@@ -1085,85 +1093,57 @@ multiplyCheck(arrays);
  * Их редактировать запрещено!
  * Дебажить, конечно же, можно.
  */
-const testCases = [
-  [10000, { name: 'День рождения.mp4', size: 1, units: 'gb' }, { speedPerSecond: 100, units: 'kb' }],
-  [1024, { name: 'Отчёт.docx', size: 1023443, units: 'kb' }, { speedPerSecond: 1, units: 'mb' }],
-  [1, { name: 'Голосовое сообщение.mp3', size: 1, units: 'b' }, { speedPerSecond: 1000, units: 'gb' }],
-  [86402, { name: 'Корги.png', size: 100.45, units: 'mb' }, { speedPerSecond: 1162.6, units: 'b' }],
-  [100450000000, { name: 'GTA V', size: 100.45, units: 'gb' }, { speedPerSecond: 1, units: 'b' }],
-] as const;
-
-type MyFile = {
-  name: string;
-  size: number;
-  units: string;
-};
-
-type Speed = {
-  speedPerSecond: number;
-  units: string;
-};
-
-type ConvertFileSizeFn = (fileSize: number, fileUnits: string, unitOfSpeed: string) => number;
-
-const convertFileSize = (fileSize: number, fileUnits: string, unitOfSpeed: string): ConvertFileSizeFn => {
-  let convertedSize;
-  if (unitOfSpeed === 'gb') {
-    if (fileUnits === 'kb') {
-      convertedSize = fileSize / 1000 ** 2;
-    } else if (fileUnits === 'мb') {
-      convertedSize = fileSize / 1000;
-    } else if (fileUnits === 'b') {
-      convertedSize = fileSize / 1000 ** 3;
-    }
-  }
-  if (unitOfSpeed === 'b') {
-    if (fileUnits === 'gb') {
-      convertedSize = fileSize * 1000 ** 3;
-    } else if (fileUnits === 'mb') {
-      convertedSize = fileSize * 1000 ** 2;
-    } else if (fileUnits === 'kb') {
-      convertedSize = fileSize * 1000;
-    }
-  }
-
-  if (unitOfSpeed === 'kb') {
-    if (fileUnits === 'gb') {
-      convertedSize = fileSize * 1000 ** 2;
-    } else if (fileUnits === 'мb') {
-      convertedSize = fileSize * 1000;
-    } else if (fileUnits === 'b') {
-      convertedSize = fileSize / 1000;
-    }
-  }
-
-  if (unitOfSpeed === 'mb') {
-    if (fileUnits === 'gb') {
-      convertedSize = fileSize * 1000;
-    } else if (fileUnits === 'kb') {
-      convertedSize = fileSize / 1000;
-    } else if (fileUnits === 'b') {
-      convertedSize = fileSize / 1000 ** 2;
-    }
-  }
-  return convertedSize;
-};
-
-function downloadTimeCalculator(file: MyFile, speed: Speed): number {
-  return convertFileSize(file.size, file.units, speed.units) / speed.speedPerSecond;
-}
-/**
- * Цикл для проверки каждого тест-кейса по очереди
- */
-
-for (const testCase of testCases) {
-  const [expected, file, speed] = testCase;
-
-  const result = downloadTimeCalculator(file, speed);
-
-  if (result === expected) {
-    console.log(`Расчеты верны для файла "${file.name}"! \tРезультат: ${result}  | Ожидаемый: ${expected}`);
-  } else {
-    console.log(`Расчеты НЕВЕРНЫ для файла "${file.name}"! \tРезультат: ${result}  | Ожидаемый: ${expected}`);
-  }
-}
+// const testCases = [
+//   [10000, { name: 'День рождения.mp4', size: 1, units: 'gb' }, { speedPerSecond: 100, units: 'kb' }],
+//   [1024, { name: 'Отчёт.docx', size: 1023443, units: 'kb' }, { speedPerSecond: 1, units: 'mb' }],
+//   [1, { name: 'Голосовое сообщение.mp3', size: 1, units: 'b' }, { speedPerSecond: 1000, units: 'gb' }],
+//   [86402, { name: 'Корги.png', size: 100.45, units: 'mb' }, { speedPerSecond: 1162.6, units: 'b' }],
+//   [100450000000, { name: 'GTA V', size: 100.45, units: 'gb' }, { speedPerSecond: 1, units: 'b' }],
+// ] as const;
+//
+// type Units = 'b' | 'kb' | 'mb' | 'gb';
+//
+// type MyFile = {
+//   name: string;
+//   size: number;
+//   units: Units;
+// };
+//
+// type Speed = {
+//   speedPerSecond: number;
+//   units: Units;
+// };
+//
+// type ConvertFileSizeFn = (fileSize: number, fileUnits: string, unitOfSpeed: string) => number;
+//
+// const convertToBytes = (fileSize: number, units: Units): number => {
+//   const powers: Record<Units, number> = {
+//     b: 0,
+//     kb: 1,
+//     mb: 2,
+//     gb: 3,
+//   };
+//
+//   return fileSize * 1000 ** powers[units];
+// };
+//
+// function downloadTimeCalculator(file: MyFile, speed: Speed): number {
+//   const fileToBytes = convertToBytes(file.size, file.units);
+//   const speedToBytes = convertToBytes(speed.speedPerSecond, speed.units);
+//   return Math.ceil(fileToBytes / speedToBytes);
+// }
+// /**
+//  * Цикл для проверки каждого тест-кейса по очереди
+//  */
+//
+// for (const testCase of testCases) {
+//   const [expected, file, speed] = testCase;
+//
+//   const result = downloadTimeCalculator(file, speed);
+//
+//   if (result === expected) {
+//     console.log(`Расчеты верны для файла "${file.name}"! \tРезультат: ${result}  | Ожидаемый: ${expected}`);
+//   } else {
+//     console.log(`Расчеты НЕВЕРНЫ для файла "${file.name}"! \tРезультат: ${result}  | Ожидаемый: ${expected}`);
+//   }
+// }
