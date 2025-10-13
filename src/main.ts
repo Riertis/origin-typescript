@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import { fi } from '@faker-js/faker';
+import { log } from 'eslint-import-resolver-typescript/lib/logger';
 /*
 type A = {
   age?: number | string;
@@ -1147,3 +1148,82 @@ cba
 //     console.log(`Расчеты НЕВЕРНЫ для файла "${file.name}"! \tРезультат: ${result}  | Ожидаемый: ${expected}`);
 //   }
 // }
+
+/*
+Скобки
+
+Написать ф-цию, которая будет проверять правильность в последовательности скобок.
+Скобки должны закрываться в том же порядке, в котором и открываются.
+
+check('(){}[]'); // true
+check('([{}{}(){}[]][])'); // true
+
+
+check('(()'); // false
+
+*/
+
+/*
+())........................
+
+buffer = '(';
+
+
+*/
+function check(brackets: string) {
+  const bracketArray = brackets.split('');
+
+  const closeBrackets = [')', '}', ']'];
+
+  const varietyBrackets = {
+    round: ['(', ')'],
+    square: ['[', ']'],
+    bracers: ['{', '}'],
+  };
+  const { round, square, bracers } = varietyBrackets;
+
+  const bufferBracket: string[] = [];
+  const lastElementBuffer = bufferBracket[bufferBracket.length - 1];
+
+  for (const bracket of bracketArray) {
+    if (closeBrackets.includes(bracket)) {
+      if (bufferBracket.length === 0) {
+        return console.log(false);
+      }
+      if (![round, square, bracers].some((arr) => arr.includes(bracket) && arr.includes(lastElementBuffer))) {
+        return console.log(false);
+      }
+      bufferBracket.pop();
+      continue;
+    }
+    bufferBracket.push(bracket);
+  }
+
+  return console.log(bufferBracket.length === 0);
+}
+//
+// function check(brackets: string): void {
+//   const stack: ('(' | '[' | '{')[] = [];
+//   const pairs = { '(': ')', '[': ']', '{': '}' } as const;
+//
+//   for (const bracket of brackets) {
+//     if (bracket in pairs) {
+//       stack.push(bracket as '(' | '[' | '{');
+//     } else {
+//       const last = stack.pop();
+//       if (last && pairs[last] !== bracket) {
+//         return console.log(false);
+//       }
+//     }
+//   }
+//
+//   return console.log(stack.length === 0);
+// }
+
+check(')()('); // false
+check('({}[])'); // true
+check('()'); // true
+check('(((((((((([{}]))))))))))'); // true
+check('((((((((((([{}])))())))))))'); // false
+check('((()})'); // false
+check('([{}{}(){}[]][])'); // true
