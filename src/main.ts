@@ -1,6 +1,6 @@
 import chalk from 'chalk';
-import { fi } from '@faker-js/faker';
-import { log } from 'eslint-import-resolver-typescript/lib/logger';
+import { faker } from '@faker-js/faker';
+
 /*
 type A = {
   age?: number | string;
@@ -1170,37 +1170,37 @@ buffer = '(';
 
 
 */
-function check(brackets: string) {
-  const bracketArray = brackets.split('');
-
-  const closeBrackets = [')', '}', ']'];
-
-  const varietyBrackets = {
-    round: ['(', ')'],
-    square: ['[', ']'],
-    bracers: ['{', '}'],
-  };
-  const { round, square, bracers } = varietyBrackets;
-
-  const bufferBracket: string[] = [];
-  const lastElementBuffer = bufferBracket[bufferBracket.length - 1];
-
-  for (const bracket of bracketArray) {
-    if (closeBrackets.includes(bracket)) {
-      if (bufferBracket.length === 0) {
-        return console.log(false);
-      }
-      if (![round, square, bracers].some((arr) => arr.includes(bracket) && arr.includes(lastElementBuffer))) {
-        return console.log(false);
-      }
-      bufferBracket.pop();
-      continue;
-    }
-    bufferBracket.push(bracket);
-  }
-
-  return console.log(bufferBracket.length === 0);
-}
+// function check(brackets: string) {
+//   const bracketArray = brackets.split('');
+//
+//   const closeBrackets = [')', '}', ']'];
+//
+//   const varietyBrackets = {
+//     round: ['(', ')'],
+//     square: ['[', ']'],
+//     bracers: ['{', '}'],
+//   };
+//   const { round, square, bracers } = varietyBrackets;
+//
+//   const bufferBracket: string[] = [];
+//   const lastElementBuffer = bufferBracket[bufferBracket.length - 1];
+//
+//   for (const bracket of bracketArray) {
+//     if (closeBrackets.includes(bracket)) {
+//       if (bufferBracket.length === 0) {
+//         return console.log(false);
+//       }
+//       if (![round, square, bracers].some((arr) => arr.includes(bracket) && arr.includes(lastElementBuffer))) {
+//         return console.log(false);
+//       }
+//       bufferBracket.pop();
+//       continue;
+//     }
+//     bufferBracket.push(bracket);
+//   }
+//
+//   return console.log(bufferBracket.length === 0);
+// }
 //
 // function check(brackets: string): void {
 //   const stack: ('(' | '[' | '{')[] = [];
@@ -1220,10 +1220,53 @@ function check(brackets: string) {
 //   return console.log(stack.length === 0);
 // }
 
-check(')()('); // false
-check('({}[])'); // true
-check('()'); // true
-check('(((((((((([{}]))))))))))'); // true
-check('((((((((((([{}])))())))))))'); // false
-check('((()})'); // false
-check('([{}{}(){}[]][])'); // true
+// check(')()('); // false
+// check('({}[])'); // true
+// check('()'); // true
+// check('(((((((((([{}]))))))))))'); // true
+// check('((((((((((([{}])))())))))))'); // false
+// check('((()})'); // false
+// check('([{}{}(){}[]][])'); // true
+
+//==================================
+
+//---1----
+// const storage = [
+//   { age: 10, name: 'Alex' },
+//   { age: 20, name: 'Max' },
+//   { age: 30, name: 'Jake' },
+//   { age: 40, name: 'Lilo' },
+// ];
+//
+// const smartSearch = (arr: any[], property: any, value: any) => {
+//   return arr.find((person) => person[property] === value);
+// };
+//
+// const person1 = smartSearch(storage, 'age', 30);
+// // { age: 30, name: 'Jake' }
+//
+// const person2 = smartSearch(storage, 'age', 10);
+// // { age: 10, name: 'Alex' }
+//
+// const person3 = smartSearch(storage, 'name', 'Lilo');
+// // { age: 40, name: 'Lilo' }
+//
+// console.log(person1);
+// console.log(person2);
+// console.log(person3);
+
+//---2----
+
+const randomArray: number[] = [];
+const randomLengthForArray = faker.number.int(20);
+
+for (let i = 0; i < randomLengthForArray; i++) {
+  randomArray.push(faker.number.int(20));
+}
+console.log(randomArray);
+const filterWithChance = (arr: number[], chance: number) => {
+  const chanceNum = (100 - chance) * 0.01;
+  return arr.filter(() => Math.random() > chanceNum);
+};
+
+console.log(filterWithChance(randomArray, 80));
