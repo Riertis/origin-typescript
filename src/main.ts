@@ -1,6 +1,3 @@
-import chalk from 'chalk';
-import { faker } from '@faker-js/faker';
-
 /*
 type A = {
   age?: number | string;
@@ -1257,16 +1254,150 @@ buffer = '(';
 
 //---2----
 
-const randomArray: number[] = [];
-const randomLengthForArray = faker.number.int(20);
+// const randomArray: number[] = [];
+// const randomLengthForArray = faker.number.int(20);
+//
+// for (let i = 0; i < randomLengthForArray; i++) {
+//   randomArray.push(faker.number.int(20));
+// }
+// console.log(randomArray);
+// const filterWithChance = (arr: number[], chance: number) => {
+//   const chanceNum = (100 - chance) * 0.01;
+//   return arr.filter(() => Math.random() > chanceNum);
+// };
+//
+// console.log(filterWithChance(randomArray, 80));
 
-for (let i = 0; i < randomLengthForArray; i++) {
-  randomArray.push(faker.number.int(20));
-}
-console.log(randomArray);
-const filterWithChance = (arr: number[], chance: number) => {
-  const chanceNum = (100 - chance) * 0.01;
-  return arr.filter(() => Math.random() > chanceNum);
-};
+//---3---
 
-console.log(filterWithChance(randomArray, 80));
+// enum Team {
+//   red = 'red',
+//   blue = 'blue',
+// }
+//
+// type User = {
+//   id: number;
+//   name: string;
+//   age: number;
+// };
+//
+// type ProcessedUser = {
+//   name: string;
+//   isAdult: boolean;
+//   team: Team;
+// };
+//
+// const users: User[] = [
+//   { id: 7, name: 'Александр Сильвестрович', age: 17 },
+//   { id: 17, name: 'Райан Сергеевич Гослинг', age: 18 },
+//   { id: 27, name: 'Джейсон Райанович Стетхем', age: 19 },
+//   { id: 37, name: 'Имя не указано', age: 8 },
+// ];
+//
+// const processUsers = (users: User[]): ProcessedUser[] => {
+//   // ... здесь ваш код
+//   return users
+//     .filter((user) => user.age >= 18)
+//     .map((user) => {
+//       const randomTeam = Math.random() > 0.5 ? Team.red : Team.blue;
+//       return {
+//         name: user.name,
+//         isAdult: true,
+//         team: randomTeam,
+//       };
+//     });
+// };
+//
+// const processed: ProcessedUser[] = processUsers(users);
+//
+// console.log(processed);
+/*
+Пример вывода! Команды будут случайными!
+[
+ { name: 'Райан Сергеевич Гослинг', isAdult: true, team: 'red' },
+ { name: 'Джейсон Райанович Стетхем', isAdult: true, team: 'blue' },
+]
+ */
+
+//---4---
+//
+// const sort = (array: User[], key: keyof User, direction: 'asc' | 'desc' = 'asc') => {
+//   return [...array].sort((a, b) => {
+//     const valueA = a[key];
+//     const valueB = b[key];
+//
+//     // Приводим к строке для безопасного сравнения
+//     const strA = String(valueA).toUpperCase();
+//     const strB = String(valueB).toUpperCase();
+//
+//     const result = 0;
+//
+//     if (strA < strB) {
+//       return -1;
+//     }
+//     if (strA > strB) {
+//       return 1;
+//     }
+//     return direction === 'desc' ? -result : result;
+//   });
+// };
+//
+// type User = { id: number; age: number; name: string };
+//
+// const users: User[] = [
+//   { id: 1, age: 10, name: 'zxc' },
+//   { id: 3, age: 20, name: 'juk' },
+//   { id: 6, age: 2, name: 'aa' },
+//   { id: 9, age: 1, name: 'ab' },
+//   { id: 2, age: 5, name: 'zz' },
+// ];
+//
+// const sortedByIdAsc = sort(users, 'id');
+// console.log(sortedByIdAsc);
+// /* Отсортированы по увеличению id
+// [
+//   { id: 1, age: 10, name: 'zxc' },
+//   { id: 2, age: 5, name: 'zz' },
+//   { id: 3, age: 20, name: 'juk' },
+//   { id: 6, age: 2, name: 'aa' },
+//   { id: 9, age: 1, name: 'ab' }
+// ]
+//  */
+//
+// const sortedByNameDesc = sort(users, 'name', 'desc');
+// console.log(sortedByNameDesc);
+// /* Отсортированы по уменьшению имени
+// [
+//   { id: 2, age: 5, name: 'zz' },
+//   { id: 1, age: 10, name: 'zxc' },
+//   { id: 3, age: 20, name: 'juk' },
+//   { id: 9, age: 1, name: 'ab' },
+//   { id: 6, age: 2, name: 'aa' }
+// ]
+//  */
+//
+// const sortedByAgeDesc = sort(users, 'age', 'desc');
+// console.log(sortedByAgeDesc);
+// /* Отсортированы по уменьшению возраста
+// [
+//   { id: 3, age: 20, name: 'juk' },
+//   { id: 1, age: 10, name: 'zxc' },
+//   { id: 2, age: 5, name: 'zz' },
+//   { id: 6, age: 2, name: 'aa' },
+//   { id: 9, age: 1, name: 'ab' }
+// ]
+//  */
+//
+// console.log(users);
+// /* ПЕРВОНАЧАЛЬНЫЙ МАССИВ USERS ОСТАЛСЯ НЕ ТРОНУТЫМ!
+// [
+//   { id: 1, age: 10, name: 'zxc' },
+//   { id: 3, age: 20, name: 'juk' },
+//   { id: 6, age: 2, name: 'aa' },
+//   { id: 9, age: 1, name: 'ab' },
+//   { id: 2, age: 5, name: 'zz' }
+// ]
+//  */
+
+//---5---
+
