@@ -272,7 +272,7 @@ familyShoppingList(family);
 //
 // console.log(md(3399999), c);
 
-//-----------------------------------------
+// -----------------------------------------
 
 // type Order = {
 //   id: number;
@@ -317,7 +317,7 @@ familyShoppingList(family);
 // };
 //
 // console.log(printOrder(firstOrder));
-//------------------------------------------
+// ------------------------------------------
 
 // type User = {
 //   id: number;
@@ -359,7 +359,7 @@ familyShoppingList(family);
 // console.log(`Фильтрация по роли`);
 // console.log(filterByRole(users, userRole.admin));
 
-//-------------------------------------------------
+// -------------------------------------------------
 
 // type Payment = {
 //   id: number;
@@ -409,7 +409,7 @@ familyShoppingList(family);
 // const taxResult = calculateTax(payments);
 // console.log('Результат расчета налога:', taxResult);
 
-//------------Деструктуризация------------------
+// ------------Деструктуризация------------------
 
 // type User = {
 //   name: string;
@@ -441,7 +441,7 @@ familyShoppingList(family);
   department: 'Кафедра информационных технологий'
 }
  */
-//-------------------------------------------
+// -------------------------------------------
 //
 // type User = {
 //   name: string;
@@ -494,7 +494,7 @@ familyShoppingList(family);
 //   department: 'Шпаклёвщик'
 // }
 //  */
-//-------------------------------
+// -------------------------------
 
 // const report = (finalists: Array<string>) => {
 //   const [firstParticipant, secondParticipant, thirdParticipant, ...otherParticipants] = finalists;
@@ -505,7 +505,7 @@ familyShoppingList(family);
 // };
 //
 // report(['Александр', 'Михаил', 'Валентин', 'Сергей', 'Артур']);
-//----------------------------------
+// ----------------------------------
 /*
 Напишите функцию showInfo, которая принимает на вход объект пользователя и выводит в консоль его карточку:
 * Имя
@@ -599,7 +599,7 @@ familyShoppingList(family);
 //
 //  */
 
-//------------операторы слияния------------
+// ------------операторы слияния------------
 
 // type Video = {
 //   id: number;
@@ -639,7 +639,7 @@ familyShoppingList(family);
 //   thirdVideo.subs || emptyValue,
 //   fourthVideo.subs,
 // );
-//--------------------------------------
+// --------------------------------------
 
 // const possibleTasks = ['Купить кота', 'Продать кота', 'Помыть кота', 'Купить арбуз'];
 //
@@ -677,7 +677,7 @@ familyShoppingList(family);
 //   taskCount(user);
 // }
 
-//-----------Чек-------------------------
+// -----------Чек-------------------------
 
 // type User = {
 //   id: number;
@@ -890,7 +890,6 @@ cba
 // const result3 = getMissingDigits([1, 5]); // [2, 3, 4]
 // console.log(result0, result1, result2, result3);
 
-
 /*
 Напишите программу для снятия наличных денег из банкомата.
 
@@ -914,7 +913,7 @@ cba
 Часть данных вам уже дана.
 Вы должны повторить вывод программы так, как показано на скриншоте ниже.
  */
-//-------------------Снятие наличных------------
+// -------------------Снятие наличных------------
 
 // type Card = {
 //   no: string;
@@ -1014,7 +1013,7 @@ cba
 // withdraw('4214 7777 8888 9999', 1111, a, logGreen, logRed); // PIN неверный!
 // withdraw('4214 7777 8888 9999', 1357, a, logGreen, logRed); // Снятие наличных 16000 руб. Баланс: 0 руб
 
-//-----Самопроверка------
+// -----Самопроверка------
 
 // const arrays = [
 //   [1, 9, 9],
@@ -1033,7 +1032,7 @@ cba
 //     console.log(result, `Умножение двух первых аргументов ${result ? '' : 'не'} равно третьему значению в массиве`);
 //   }
 
-  /*
+/*
   for (let i = 0; i < arrays.length; i++) {
     if (multiply(arrays[i][0], arrays[i][1]) !== arrays[i][2]) {
       console.log(false, 'Умножение двух первых аргументов не равно третьему значению в массиве');
@@ -1046,8 +1045,7 @@ cba
 //
 // multiplyCheck(arrays);
 
-
-//--------Время скачивания файлов-----------
+// --------Время скачивания файлов-----------
 
 /*
 Создайте функцию downloadTimeCalculator, которая умеет рассчитывать время в секундах, необходимое для загрузки файла.
@@ -1225,9 +1223,9 @@ buffer = '(';
 // check('((()})'); // false
 // check('([{}{}(){}[]][])'); // true
 
-//==================================
+// ==================================
 
-//---1----
+// ---1----
 // const storage = [
 //   { age: 10, name: 'Alex' },
 //   { age: 20, name: 'Max' },
@@ -1252,7 +1250,7 @@ buffer = '(';
 // console.log(person2);
 // console.log(person3);
 
-//---2----
+// ---2----
 
 // const randomArray: number[] = [];
 // const randomLengthForArray = faker.number.int(20);
@@ -1268,7 +1266,7 @@ buffer = '(';
 //
 // console.log(filterWithChance(randomArray, 80));
 
-//---3---
+// ---3---
 
 // enum Team {
 //   red = 'red',
@@ -1319,7 +1317,7 @@ buffer = '(';
 ]
  */
 
-//---4---
+// ---4---
 //
 // const sort = (array: User[], key: keyof User, direction: 'asc' | 'desc' = 'asc') => {
 //   return [...array].sort((a, b) => {
@@ -1399,5 +1397,147 @@ buffer = '(';
 // ]
 //  */
 
-//---5---
+// ---5---
 
+// const wordsArray = ['asdasdasd', 'asd', 'asddddv', 'fdfgdfgdf'];
+//
+// const getLongWord = (words: string[]): string => {
+//   return words.reduce((acc, word) => {
+//     return word.length > acc.length ? word : acc;
+//   }, '');
+// };
+//
+// console.log(getLongWord(wordsArray));
+
+// ---6---
+
+// const deduplicate = (word: string) => {
+//
+//   return word.split('').reduce((acc: string, letter) => {
+//     if (acc[acc.length - 1] !== letter) {
+//       acc += letter;
+//     }
+//     return acc;
+//   }, '');
+// };
+//
+// const result = deduplicate('uuunbbeliaaaaveeabbbblllllee');
+// console.log(result); // unbeliaveable
+
+// ---7---
+
+// const countTypes = (...types: (string | number | boolean | object | undefined)[]) => {
+//   return types.reduce((acc: Record<string, number>, type) => {
+//     const typeName = typeof type;
+//     acc[typeName] = (acc[typeName] || 0) + 1;
+//     return acc;
+//   }, {});
+// };
+//
+// console.log(countTypes(3, true, 'a', 1, {}, () => {}, 4, [], undefined, false, 0, undefined, {}, ''));
+//
+// // Ожидаемый вывод:
+// // { number: 4, boolean: 2, string: 2, object: 3, function: 2, undefined: 2 }
+
+//---8---
+
+/*
+Вам даны 2 пользователя банковской системы.
+У каждого пользователя есть список проведенных операций по банковской карте.
+Каждая операция может быть как положительной (пополнение), так и отрицательной (снятие).
+
+При открытии счета у пользователя есть стартовый баланс - он может быть как отрицательным, так и положительным.
+
+Напишите функцию calculateBalanceForUser(user: User): number, которая принимает на вход объект типа User,
+а возвращает число - текущий баланс пользователя.
+С помощью reduce просто просуммируйте стартовый баланс и все операции.
+ */
+//
+// type Transaction = {
+//   id: number;
+//   diff: number;
+// };
+//
+// type User = {
+//   id: number;
+//   name: string;
+//   startBalance: number;
+//   transactions: Transaction[];
+// };
+//
+// const alexander: User = {
+//   id: 37,
+//   name: 'AleX',
+//   startBalance: 0,
+//   transactions: [
+//     { id: 8, diff: 100 },
+//     { id: 30, diff: -50 },
+//     { id: 23, diff: 250 },
+//   ],
+// };
+//
+// const max: User = {
+//   id: 40,
+//   name: 'MaX',
+//   startBalance: -3,
+//   transactions: [
+//     { id: 4, diff: 9 },
+//     { id: 5, diff: -18 },
+//     { id: 5, diff: 3 },
+//   ],
+// };
+//
+// const calculateBalanceForUser = (user: User): number => {
+//   const userDiffs = user.transactions.map((transaction) => transaction.diff);
+//   return userDiffs.reduce((acc: number, amount: number): number => {
+//     return acc + amount;
+//   }, user.startBalance);
+// };
+//
+// const alexanderBalance = calculateBalanceForUser(alexander); // Его история операция: 0 + 100 - 50 + 250
+// console.log(alexanderBalance); // 300
+//
+// const maxBalance = calculateBalanceForUser(max); // Его история операция: -3 + 9 - 18 + 3
+// console.log(maxBalance); // -9
+
+//---9---
+
+const values = [
+  [1, 100],
+  [2, 200],
+  [3, 300],
+  [1, 2],
+  [3, 400],
+  [4, 500],
+  [1, 99],
+];
+
+type Counter = {
+  count: number;
+  sum: number;
+};
+
+const result = values.reduce((acc, [score, value]): Record<string, Counter> => {
+  if (!acc[score]) {
+    acc[score] = { count: 0, sum: 0 };
+  }
+  acc[score].count++;
+  acc[score].sum += value;
+
+  return acc;
+}, {});
+console.log(result);
+/*
+{
+  '1': { count: 3, sum: 201 },
+  '2': { count: 1, sum: 200 },
+  '3': { count: 2, sum: 700 },
+  '4': { count: 1, sum: 500 }
+}
+
+(Объяснение) Если не поняли, это означает, что:
+Оценка 1 встретилась 3 раза - [1, 100], [1, 2] и [1, 99] и всего = 201 чел (100+2+99)
+Оценка 2 встретилась 1 раз - [2, 200] и всего 200 чел
+Оценка 3 встретилась 2 раза - [3, 300] и [3, 400] и всего 700 чел
+Оценка 4 встретилась 1 раз - [4, 500] и всего 500 чел
+ */
