@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 /*
 type A = {
   age?: number | string;
@@ -1439,7 +1440,7 @@ buffer = '(';
 // // Ожидаемый вывод:
 // // { number: 4, boolean: 2, string: 2, object: 3, function: 2, undefined: 2 }
 
-//---8---
+// ---8---
 
 /*
 Вам даны 2 пользователя банковской системы.
@@ -1500,33 +1501,33 @@ buffer = '(';
 // const maxBalance = calculateBalanceForUser(max); // Его история операция: -3 + 9 - 18 + 3
 // console.log(maxBalance); // -9
 
-//---9---
+// ---9---
 
-const values = [
-  [1, 100],
-  [2, 200],
-  [3, 300],
-  [1, 2],
-  [3, 400],
-  [4, 500],
-  [1, 99],
-];
-
-type Counter = {
-  count: number;
-  sum: number;
-};
-
-const result = values.reduce((acc, [score, value]): Record<string, Counter> => {
-  if (!acc[score]) {
-    acc[score] = { count: 0, sum: 0 };
-  }
-  acc[score].count++;
-  acc[score].sum += value;
-
-  return acc;
-}, {});
-console.log(result);
+// const values = [
+//   [1, 100],
+//   [2, 200],
+//   [3, 300],
+//   [1, 2],
+//   [3, 400],
+//   [4, 500],
+//   [1, 99],
+// ];
+//
+// type Counter = {
+//   count: number;
+//   sum: number;
+// };
+//
+// const result = values.reduce((acc, [score, value]): Record<string, Counter> => {
+//   if (!acc[score]) {
+//     acc[score] = { count: 0, sum: 0 };
+//   }
+//   acc[score].count++;
+//   acc[score].sum += value;
+//
+//   return acc;
+// }, {});
+// console.log(result);
 /*
 {
   '1': { count: 3, sum: 201 },
@@ -1541,3 +1542,133 @@ console.log(result);
 Оценка 3 встретилась 2 раза - [3, 300] и [3, 400] и всего 700 чел
 Оценка 4 встретилась 1 раз - [4, 500] и всего 500 чел
  */
+
+/*
+Найти в первом числе все пары цифр, произведение которых равно второму аргументу,
+и вернуть строку с индексами этих цифр, записанными подряд.
+Если таких пар несколько, достаточно вернуть первую попавшуюся.
+
+Если ни одной подходящей пары нет, вернуть строку “-1-1”.
+
+findMultiply(1234567890, 18) => 18
+👆18, потому что по индексу [1] лежит цифра "2", а по индексу [8] лежит "9", 2 и 9 в сумме даёт 18
+
+findMultiply(1234567890, 12) => 23
+👆23, потому что по индексу [2] число 3, а по индексу [3] число 4, а 3*4 = 12
+
+findMultiply(592729, 81) => 15
+findMultiply(123, 5) => -1-1
+findMultiply(55, 25) => 01
+ */
+// ---циклы---
+//
+// const findMultiply = (value: number, multiplyNumbers: number): string => {
+//   const valueArray = value.toString().split('');
+//   for (let i = 0; i < valueArray.length; i++) {
+//     for (let j = 0; j < valueArray.length; j++) {
+//       const multiply = Number(valueArray[i]) * Number(valueArray[j]);
+//       if (multiply === multiplyNumbers && i !== j) {
+//         return `${i}${j}`;
+//       }
+//     }
+//   }
+//   return `-1 -1`;
+// };
+//
+// console.log(findMultiply(592729, 81)); // => 15
+// console.log(findMultiply(123, 5)); // => -1-1
+// console.log(findMultiply(55, 25)); // => 01
+
+/*
+
+
+Написать 2 функции:
+1. Для сокращения ссылки
+2. Для получения полной ссылки по короткой
+
+Для хранения данных между вызовами функций используйте просто массив в переменной.
+
+
+Для самого "сокращения" вы просто генерируйте рандомную короткую строку.
+
+Опишите все типы TypeScript.
+
+ */
+
+type Link = string;
+type ShortLink = string;
+type LongLink = {
+  clickingCount: number;
+  link: Link;
+};
+type Links = Record<ShortLink, LongLink>;
+type Database = Links[];
+
+const database: Database = [];
+
+const link1 = 'https://backend-mentor.tech/articles/javascript?level=newbee';
+const link2 =
+  'https://market.yandex.ru/card/kreslo-meshok-grusha-laavi-home-razmer-khxxxl-mebelnyy-velyur-seryy/103666480842?do';
+const link3 =
+  'https://market.yandex.ru/card/zerkalo-pryamougolnoye-s-podsvetkoy-luminor-11080-s-vyklyuchatelem-na-vzmakh-s-podsvetkoy-3000k/102990889179?do-waremd5=qe';
+
+const createShortLink = (link: Link): ShortLink => {
+  let shortLink: ShortLink;
+
+  do {
+    shortLink = faker.string.nanoid(6);
+    // eslint-disable-next-line no-loop-func
+  } while (database.some((short) => shortLink in short));
+
+  database.push({
+    [shortLink]: {
+      clickingCount: 0,
+      link: link,
+    },
+  });
+  return shortLink;
+};
+
+const getFullLink = (shortLink: ShortLink): Link => {
+  const linkToFind = database.find((linksToFind) => shortLink in linksToFind);
+  if (linkToFind) {
+    linkToFind[shortLink].clickingCount++;
+    return linkToFind[shortLink].link;
+  }
+  return 'Ссылка не найдена';
+};
+
+const s1 = createShortLink(link1); // Какая-то короткая ссылка
+const s2 = createShortLink(link2); // Какая-то короткая ссылка
+const s3 = createShortLink(link3); // Какая-то короткая ссылка
+
+const full = getFullLink(s1); // Здесь полная ссылка
+const full2 = getFullLink(s1); // Здесь полная ссылка
+const full3 = getFullLink(s2); // Здесь полная ссылка
+const full4 = getFullLink(s2); // Здесь полная ссылка
+const full5 = getFullLink(s2); // Здесь полная ссылка
+const full6 = getFullLink(s3); // Здесь полная ссылка
+
+console.log(database);
+
+const getTopByViews = (count: number) => {
+  if (count < 1) {
+    return 'Топ не сформирован';
+  }
+  const getClickingCount = (item: Links): number => {
+    return Object.values(item)[0].clickingCount;
+  };
+
+  const sortedDatabaseDesc = [...database].sort((a, b) => getClickingCount(b) - getClickingCount(a));
+
+  const topLinks = []; // пока длинна массива меньше count пушить объекты по убыванию
+
+  for (let i = 0; i < count; i++) {
+    // const topClicking = sortedDatabaseDesc.reduce((acc: Record<string, number>, links: Links): Record<string, number> => {}
+    topLinks.push(sortedDatabaseDesc[i]);
+  }
+  return topLinks;
+};
+const topViews = getTopByViews(5);
+console.log(topViews);
+// };
