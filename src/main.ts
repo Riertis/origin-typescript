@@ -49,7 +49,6 @@ function sumAllValuesInObjArray(objArray: myObjArray) {
 
 console.log(sumAllValuesInObjArray([{ a: 20, b: 30 }, {}, { a: 3 }, { x: 5 }])); // 58
 */
-
 /*
 Напишите функцию, которая получает на вход семью и выводит в консоль список покупок этой семьи.
 Если название продукта имеет чётное количество знаков - выведите название ЗАГЛАВНЫМИ БУКВАМИ, например
@@ -128,7 +127,6 @@ const family: Family = {
 
 familyShoppingList(family);
  */
-
 /*
 Помогите администрации театра выбрать зал и в рандомном порядке рассадить посетителей.
 
@@ -181,7 +179,6 @@ familyShoppingList(family);
   ['-', 'Алексей', 'Максим'],
   ['Андрей', 'Валентин', '-']]
  */
-
 //
 // function seatVisitors(visitors: string[]) {
 //   const size = Math.ceil(Math.sqrt(visitors.length));
@@ -210,19 +207,15 @@ familyShoppingList(family);
 // }
 //
 // seatVisitors(['Саша', 'Максим', 'Алексей', 'Валентин', 'Андрей', 'Констанин', 'Игорь', 'Денис', 'Владимиир', 'Вадим']);
-
 // const matrix: string[][] = [];
 // const size = 2;
-
 // for (let i = 0; i < size; i++) {
 //   matrix.push([]);
-
 //   for (let j = 0; j < size; j++) {
 //     matrix[i].push("-");
 //   }
 // }
 // console.log(matrix);
-
 /*
 Напишите функцию, которая получает на вход число,
 а возвращает наибольший делитель (НД) для этого числа.
@@ -243,9 +236,7 @@ familyShoppingList(family);
 85 - 17
 123 - 41
 */
-
 // md => max divider
-
 // let c = 0;
 //
 // function md(num: number) {
@@ -272,9 +263,7 @@ familyShoppingList(family);
 // }
 //
 // console.log(md(3399999), c);
-
 // -----------------------------------------
-
 // type Order = {
 //   id: number;
 //   amount: number;
@@ -319,7 +308,6 @@ familyShoppingList(family);
 //
 // console.log(printOrder(firstOrder));
 // ------------------------------------------
-
 // type User = {
 //   id: number;
 //   email: string;
@@ -359,9 +347,7 @@ familyShoppingList(family);
 // console.log(`---------------------------------`);
 // console.log(`Фильтрация по роли`);
 // console.log(filterByRole(users, userRole.admin));
-
 // -------------------------------------------------
-
 // type Payment = {
 //   id: number;
 //   month: string;
@@ -409,9 +395,7 @@ familyShoppingList(family);
 //
 // const taxResult = calculateTax(payments);
 // console.log('Результат расчета налога:', taxResult);
-
 // ------------Деструктуризация------------------
-
 // type User = {
 //   name: string;
 //   age: number;
@@ -496,7 +480,6 @@ familyShoppingList(family);
 // }
 //  */
 // -------------------------------
-
 // const report = (finalists: Array<string>) => {
 //   const [firstParticipant, secondParticipant, thirdParticipant, ...otherParticipants] = finalists;
 //   console.log(`Первое место: ${firstParticipant}`);
@@ -599,9 +582,7 @@ familyShoppingList(family);
 // Фото: https://photos.com/default.jpg
 //
 //  */
-
 // ------------операторы слияния------------
-
 // type Video = {
 //   id: number;
 //   name: string;
@@ -641,7 +622,6 @@ familyShoppingList(family);
 //   fourthVideo.subs,
 // );
 // --------------------------------------
-
 // const possibleTasks = ['Купить кота', 'Продать кота', 'Помыть кота', 'Купить арбуз'];
 //
 // type User = {
@@ -677,9 +657,7 @@ familyShoppingList(family);
 // for (const user of users) {
 //   taskCount(user);
 // }
-
 // -----------Чек-------------------------
-
 // type User = {
 //   id: number;
 //   name?: string;
@@ -784,7 +762,6 @@ familyShoppingList(family);
 // printCheque(order1);
 // printCheque(order2);
 // printCheque(order3);
-
 /*
 Напишите функцию, которая принимает на вход текст и набор символов.
 И возвращает true/false - содержатся ли символы в любом порядке в полученном тексте
@@ -799,7 +776,6 @@ cba
 
 
 */
-
 /*
 Напишите функцию, которая принимает на вход текст и набор символов.
 И возвращает true/false - содержатся ли символы в любом порядке в полученном тексте
@@ -814,7 +790,6 @@ cba
 
 
 */
-
 // привет => {п:1, р:1, ...}
 // const countChars = (text: string) => {
 //   const resultCountChars: Record<string, number> = {};
@@ -828,7 +803,6 @@ cba
 //   }
 //   return resultCountChars;
 // };
-
 // function isKeysEqual(obj1: Record<string, number>, obj2: Record<string, number>): boolean {
 //   const keys1 = Object.keys(obj1);
 //   const keys2 = Object.keys(obj2);
@@ -844,9 +818,7 @@ cba
 //   }
 //   return true;
 // }
-
 //
-
 /*
 
 0. Используя ф-кцию countChars "анализируем" символы "pml" и получаем {p:1, m:1, l:1}
@@ -860,13 +832,11 @@ cba
 8. Дальше - mpl, это {m: 1, p: 1, l:1}, сравниваем с нужным {p:1, m:1, l:1} - найдено! true!
 
 */
-
 /*
 Пропущенные числа
 Напишите функцию, которая получает на вход отсортированный массив чисел от 1 до N и возвращает пропущенные числа.
 Если массив, полученный на вход, не отсортирован, необходимо вернуть null.
 */
-
 // function getMissingDigits(array: number[]) {
 //   const missNumbers: number[] = [];
 //
@@ -890,7 +860,6 @@ cba
 //
 // const result3 = getMissingDigits([1, 5]); // [2, 3, 4]
 // console.log(result0, result1, result2, result3);
-
 /*
 Напишите программу для снятия наличных денег из банкомата.
 
@@ -915,7 +884,6 @@ cba
 Вы должны повторить вывод программы так, как показано на скриншоте ниже.
  */
 // -------------------Снятие наличных------------
-
 // type Card = {
 //   no: string;
 //   pin: number;
@@ -1013,9 +981,7 @@ cba
 // withdraw('4214 7777 8888 9999', 1111, a, logGreen, logRed); // PIN неверный!
 // withdraw('4214 7777 8888 9999', 1111, a, logGreen, logRed); // PIN неверный!
 // withdraw('4214 7777 8888 9999', 1357, a, logGreen, logRed); // Снятие наличных 16000 руб. Баланс: 0 руб
-
 // -----Самопроверка------
-
 // const arrays = [
 //   [1, 9, 9],
 //   [2, 3, 6],
@@ -1032,7 +998,6 @@ cba
 //     const result = multiply(a, b) === expectedResult;
 //     console.log(result, `Умножение двух первых аргументов ${result ? '' : 'не'} равно третьему значению в массиве`);
 //   }
-
 /*
   for (let i = 0; i < arrays.length; i++) {
     if (multiply(arrays[i][0], arrays[i][1]) !== arrays[i][2]) {
@@ -1045,9 +1010,7 @@ cba
 // }
 //
 // multiplyCheck(arrays);
-
 // --------Время скачивания файлов-----------
-
 /*
 Создайте функцию downloadTimeCalculator, которая умеет рассчитывать время в секундах, необходимое для загрузки файла.
 Функция на вход принимает информацию о файле и информацию о скорости скачивания.
@@ -1084,7 +1047,6 @@ cba
 Тест-кейсы по очереди в цикле проверяют, что вызов вашей функции с этим файлом
 и этой скоростью даст ответ, который совпадает с ожидаемым.
  */
-
 /**
  * Конкретные тестовые кейсы
  * Их редактировать запрещено!
@@ -1144,7 +1106,6 @@ cba
 //     console.log(`Расчеты НЕВЕРНЫ для файла "${file.name}"! \tРезультат: ${result}  | Ожидаемый: ${expected}`);
 //   }
 // }
-
 /*
 Скобки
 
@@ -1158,7 +1119,6 @@ check('([{}{}(){}[]][])'); // true
 check('(()'); // false
 
 */
-
 /*
 ())........................
 
@@ -1215,7 +1175,6 @@ buffer = '(';
 //
 //   return console.log(stack.length === 0);
 // }
-
 // check(')()('); // false
 // check('({}[])'); // true
 // check('()'); // true
@@ -1223,9 +1182,7 @@ buffer = '(';
 // check('((((((((((([{}])))())))))))'); // false
 // check('((()})'); // false
 // check('([{}{}(){}[]][])'); // true
-
 // ==================================
-
 // ---1----
 // const storage = [
 //   { age: 10, name: 'Alex' },
@@ -1250,9 +1207,7 @@ buffer = '(';
 // console.log(person1);
 // console.log(person2);
 // console.log(person3);
-
 // ---2----
-
 // const randomArray: number[] = [];
 // const randomLengthForArray = faker.number.int(20);
 //
@@ -1266,9 +1221,7 @@ buffer = '(';
 // };
 //
 // console.log(filterWithChance(randomArray, 80));
-
 // ---3---
-
 // enum Team {
 //   red = 'red',
 //   blue = 'blue',
@@ -1317,7 +1270,6 @@ buffer = '(';
  { name: 'Джейсон Райанович Стетхем', isAdult: true, team: 'blue' },
 ]
  */
-
 // ---4---
 //
 // const sort = (array: User[], key: keyof User, direction: 'asc' | 'desc' = 'asc') => {
@@ -1397,9 +1349,7 @@ buffer = '(';
 //   { id: 2, age: 5, name: 'zz' }
 // ]
 //  */
-
 // ---5---
-
 // const wordsArray = ['asdasdasd', 'asd', 'asddddv', 'fdfgdfgdf'];
 //
 // const getLongWord = (words: string[]): string => {
@@ -1409,9 +1359,7 @@ buffer = '(';
 // };
 //
 // console.log(getLongWord(wordsArray));
-
 // ---6---
-
 // const deduplicate = (word: string) => {
 //
 //   return word.split('').reduce((acc: string, letter) => {
@@ -1424,9 +1372,7 @@ buffer = '(';
 //
 // const result = deduplicate('uuunbbeliaaaaveeabbbblllllee');
 // console.log(result); // unbeliaveable
-
 // ---7---
-
 // const countTypes = (...types: (string | number | boolean | object | undefined)[]) => {
 //   return types.reduce((acc: Record<string, number>, type) => {
 //     const typeName = typeof type;
@@ -1439,9 +1385,7 @@ buffer = '(';
 //
 // // Ожидаемый вывод:
 // // { number: 4, boolean: 2, string: 2, object: 3, function: 2, undefined: 2 }
-
 // ---8---
-
 /*
 Вам даны 2 пользователя банковской системы.
 У каждого пользователя есть список проведенных операций по банковской карте.
@@ -1500,9 +1444,7 @@ buffer = '(';
 //
 // const maxBalance = calculateBalanceForUser(max); // Его история операция: -3 + 9 - 18 + 3
 // console.log(maxBalance); // -9
-
 // ---9---
-
 // const values = [
 //   [1, 100],
 //   [2, 200],
@@ -1542,7 +1484,6 @@ buffer = '(';
 Оценка 3 встретилась 2 раза - [3, 300] и [3, 400] и всего 700 чел
 Оценка 4 встретилась 1 раз - [4, 500] и всего 500 чел
  */
-
 /*
 Найти в первом числе все пары цифр, произведение которых равно второму аргументу,
 и вернуть строку с индексами этих цифр, записанными подряд.
@@ -1578,7 +1519,6 @@ findMultiply(55, 25) => 01
 // console.log(findMultiply(592729, 81)); // => 15
 // console.log(findMultiply(123, 5)); // => -1-1
 // console.log(findMultiply(55, 25)); // => 01
-
 /*
 
 
@@ -1594,81 +1534,253 @@ findMultiply(55, 25) => 01
 Опишите все типы TypeScript.
 
  */
-
-type Link = string;
-type ShortLink = string;
-type LongLink = {
-  clickingCount: number;
-  link: Link;
-};
-type Links = Record<ShortLink, LongLink>;
-type Database = Links[];
-
-const database: Database = [];
-
-const link1 = 'https://backend-mentor.tech/articles/javascript?level=newbee';
-const link2 =
-  'https://market.yandex.ru/card/kreslo-meshok-grusha-laavi-home-razmer-khxxxl-mebelnyy-velyur-seryy/103666480842?do';
-const link3 =
-  'https://market.yandex.ru/card/zerkalo-pryamougolnoye-s-podsvetkoy-luminor-11080-s-vyklyuchatelem-na-vzmakh-s-podsvetkoy-3000k/102990889179?do-waremd5=qe';
-
-const createShortLink = (link: Link): ShortLink => {
-  let shortLink: ShortLink;
-
-  do {
-    shortLink = faker.string.nanoid(6);
-    // eslint-disable-next-line no-loop-func
-  } while (database.some((short) => shortLink in short));
-
-  database.push({
-    [shortLink]: {
-      clickingCount: 0,
-      link: link,
-    },
-  });
-  return shortLink;
-};
-
-const getFullLink = (shortLink: ShortLink): Link => {
-  const linkToFind = database.find((linksToFind) => shortLink in linksToFind);
-  if (linkToFind) {
-    linkToFind[shortLink].clickingCount++;
-    return linkToFind[shortLink].link;
-  }
-  return 'Ссылка не найдена';
-};
-
-const s1 = createShortLink(link1); // Какая-то короткая ссылка
-const s2 = createShortLink(link2); // Какая-то короткая ссылка
-const s3 = createShortLink(link3); // Какая-то короткая ссылка
-
-const full = getFullLink(s1); // Здесь полная ссылка
-const full2 = getFullLink(s1); // Здесь полная ссылка
-const full3 = getFullLink(s2); // Здесь полная ссылка
-const full4 = getFullLink(s2); // Здесь полная ссылка
-const full5 = getFullLink(s2); // Здесь полная ссылка
-const full6 = getFullLink(s3); // Здесь полная ссылка
-
-console.log(database);
-
-const getTopByViews = (count: number) => {
-  if (count < 1) {
-    return 'Топ не сформирован';
-  }
-  const getClickingCount = (item: Links): number => {
-    return Object.values(item)[0].clickingCount;
-  };
-
-  const sortedDatabaseDesc = [...database].sort((a, b) => getClickingCount(b) - getClickingCount(a));
-
-  const topLinks = []; // пока длинна массива меньше count пушить объекты по убыванию
-
-  for (let i = 0; i < count; i++) {
-    // const topClicking = sortedDatabaseDesc.reduce((acc: Record<string, number>, links: Links): Record<string, number> => {}
-    topLinks.push(sortedDatabaseDesc[i]);
-  }
-  return topLinks;
-};
-const topViews = getTopByViews(5);
-console.log(topViews);
+//
+// type Link = string;
+// type ShortLink = string;
+// type LongLink = {
+//   clickingCount: number;
+//   link: Link;
 // };
+// type Links = Record<ShortLink, LongLink>;
+// type Database = Links[];
+//
+// const database: Database = [];
+//
+// const link1 = 'https://backend-mentor.tech/articles/javascript?level=newbee';
+// const link2 =
+//   'https://market.yandex.ru/card/kreslo-meshok-grusha-laavi-home-razmer-khxxxl-mebelnyy-velyur-seryy/103666480842?do';
+// const link3 =
+//   'https://market.yandex.ru/card/zerkalo-pryamougolnoye-s-podsvetkoy-luminor-11080-s-vyklyuchatelem-na-vzmakh-s-podsvetkoy-3000k/102990889179?do-waremd5=qe';
+//
+// const createShortLink = (link: Link): ShortLink => {
+//   let shortLink: ShortLink;
+//
+//   do {
+//     shortLink = faker.string.nanoid(6);
+//     // eslint-disable-next-line no-loop-func
+//   } while (database.some((short) => shortLink in short));
+//
+//   database.push({
+//     [shortLink]: {
+//       clickingCount: 0,
+//       link: link,
+//     },
+//   });
+//   return shortLink;
+// };
+//
+// const getFullLink = (shortLink: ShortLink): Link => {
+//   const linkToFind = database.find((linksToFind) => shortLink in linksToFind);
+//   if (linkToFind) {
+//     linkToFind[shortLink].clickingCount++;
+//     return linkToFind[shortLink].link;
+//   }
+//   return 'Ссылка не найдена';
+// };
+//
+// const s1 = createShortLink(link1); // Какая-то короткая ссылка
+// const s2 = createShortLink(link2); // Какая-то короткая ссылка
+// const s3 = createShortLink(link3); // Какая-то короткая ссылка
+//
+// const full = getFullLink(s1); // Здесь полная ссылка
+// const full2 = getFullLink(s1); // Здесь полная ссылка
+// const full3 = getFullLink(s2); // Здесь полная ссылка
+// const full4 = getFullLink(s2); // Здесь полная ссылка
+// const full5 = getFullLink(s2); // Здесь полная ссылка
+// const full6 = getFullLink(s3); // Здесь полная ссылка
+//
+// console.log(database);
+//
+// const getTopByViews = (count: number) => {
+//   if (count < 1) {
+//     return 'Топ не сформирован';
+//   }
+//   const getClickingCount = (item: Links): number => {
+//     return Object.values(item)[0].clickingCount;
+//   };
+//
+//   const sortedDatabaseDesc = [...database].sort((a, b) => getClickingCount(b) - getClickingCount(a));
+//
+//   const topLinks = []; // пока длинна массива меньше count пушить объекты по убыванию
+//
+//   for (let i = 0; i < count; i++) {
+//     // const topClicking = sortedDatabaseDesc.reduce((acc: Record<string, number>, links: Links): Record<string, number> => {}
+//     topLinks.push(sortedDatabaseDesc[i]);
+//   }
+//   return topLinks;
+// };
+// const topViews = getTopByViews(5);
+// console.log(topViews);
+// ---Задание с паролями---
+/*
+Вам необходимо разработать сервис для авторизации пользователей.
+Примерно такие же сервисы используются в большинстве Backend приложений.
+
+Вам нужно реализовать 2 функции:
+* register() - получает на вход данные типа RegisterData с указанием почты, пароля и имени человека.
+* login() - получает на вход данные типа LoginData с указанием почты и пароля.
+
+Каждый новый зарегистрированный пользователь получает свой id, используя faker.string.nanoid
+
+Данные пусть будут храниться в массиве database, представим что это наша "база данных"
+
+Пароль хранить в базе данных в "открытом" виде НЕБЕЗОПАСНО и на самом деле никто так не делает.
+Пароли всегда хранятся в захешированном виде (напр. библиотека bcrypt), но пока хватит примитивных
+методов хеширования - будем использовать sha256, я уже оставил вам функцию generateHash,
+в неё вы можете передать строку, а в ответе получите эту строку в захешированном виде.
+
+Если пользовать регистрируется, ему должно вывестись сообщение.
+Если происходит попытка входа для несуществующего пользователя, должно вывестить сообщение
+
+При 3-х ПОДРЯД неверный попытках ввода дальнейшие входы блокируются.
+
+Если пользователь ввел пароль неверный в первый или второй раз - вывести сообщение
+Если пользователь ввел пароль неверно в третий раз ПОДРЯД - сообщение с информацией о блокировке
+ */
+import { createHash } from 'node:crypto';
+
+/**
+ * Функция для генерации хеша, на вход получает строку, на выход даёт её в хешированном виде
+ */
+function generateHash(rawText: string): string {
+  return createHash('sha256') // выбираем алгоритм SHA-256
+    .update(rawText) // обновляем хеш данными
+    .digest('hex'); // выводим результат в шестнадцатеричном формате
+}
+
+type User = {
+  id: number | string;
+  name: string;
+  email: string;
+  password: string;
+  badTries?: number;
+};
+
+type LoginData = {
+  name?: string;
+  email: string;
+  password: string;
+};
+
+type RegisterData = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+const database: User[] = [];
+
+const register = (data: RegisterData) => {
+  const { name, email, password } = data;
+  const generateUserId = faker.string.nanoid(8);
+  const hashedUserPassword = generateHash(password);
+  const user: User = {
+    id: generateUserId,
+    name,
+    email,
+    password: hashedUserPassword,
+  };
+  database.push(user);
+  console.log(`${name}, вы успешно зарегистрированы, ваш id - ${generateUserId}`);
+};
+
+const login = (data: LoginData) => {
+  const { name, email, password } = data;
+  const hashedUserPassword = generateHash(password);
+  let user: User | null = null;
+
+  for (const userDb of database) {
+    if (userDb.email === email) {
+      user = userDb;
+      break;
+    }
+  }
+
+  if (!user) {
+    console.log('Пользователь не найден');
+    return;
+  }
+
+  if (user.badTries === undefined) {
+    user.badTries = 0;
+  }
+
+  if (user.password !== hashedUserPassword) {
+    user.badTries += 1;
+    console.log(user.badTries >= 3 ? 'Пользователь заблокирован' : 'Неверный пароль');
+    return;
+  }
+  if (user.badTries >= 3) {
+    console.log('Пользователь заблокирован');
+    return;
+  }
+
+  user.badTries = 0;
+  console.log(`Добро пожаловать, ${name}`);
+};
+
+/**
+ * Ниже идут примеры использования ваших функций
+ */
+
+/* создать пользователей с типом RegisterData более правильно ?
+const maxim: LoginData = { name: 'maxim', email: 'maxim@gmail.com', password: '123456' };
+const mihail: LoginData = { name: 'mihail', email: 'mihail@gmail.com', password: '223223' };
+*/
+
+const maxim: RegisterData = { name: 'maxim', email: 'maxim@gmail.com', password: '123456' };
+const mihail: RegisterData = { name: 'mihail', email: 'mihail@gmail.com', password: '223223' };
+
+register(maxim); // maxim, вы успешно зарегистрированы, ваш id - jYhvZ!
+register(mihail); // mihail, вы успешно зарегистрированы, ваш id - oPgxU!
+
+/**
+ * Проверяем Максима, он должен на первый раз успешно войти,
+ * а дальше за 3 неверных входа заблокироваться
+ */
+console.log('Проверка Максима:');
+const maximLoginData: LoginData = { ...maxim };
+
+login(maximLoginData); // Добро пожаловать, maxim
+
+maximLoginData.password = '--';
+
+login(maximLoginData); // Неверный пароль!
+login(maximLoginData); // Неверный пароль!
+login(maximLoginData); // Неверный пароль! Вы заблокированы!
+
+maximLoginData.password = '123456';
+login(maximLoginData); // Вы заблокированы!
+login(maximLoginData); // Вы заблокированы!
+
+/**
+ * Проверяем Михаила, счетчик его неверных попыток входа должен сбрасываться
+ * Блокировка не должна происходить
+ */
+console.log('\n\nПроверка Михаила:');
+// const mihailLoginData: RegisterData = { ...mihail }; // вероятно опечатка?
+const mihailLoginData: LoginData = { ...mihail };
+
+login(mihailLoginData); // Добро пожаловать, mihail
+
+mihailLoginData.password = '-';
+login(mihailLoginData); // Неверный пароль!
+login(mihailLoginData); // Неверный пароль!
+
+mihailLoginData.password = mihail.password;
+
+login(mihailLoginData); // Добро пожаловать, mihail
+
+mihailLoginData.password = '-';
+login(mihailLoginData); // Неверный пароль!
+login(mihailLoginData); // Неверный пароль!
+
+mihailLoginData.password = mihail.password;
+
+login(mihailLoginData); // Добро пожаловать, mihail
+
+/**
+ * Проверяем несуществующего пользователя
+ */
+console.log('Проверяем несуществующего пользователя:');
+login({ email: 'a@a.a', password: 'a' }); // Пользователь не найден!
