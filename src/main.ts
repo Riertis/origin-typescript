@@ -49,5 +49,4 @@ const employees: User[] = [
 
 const employeeMap = new Map<number, User>();
 employees.forEach((emp) => employeeMap.set(emp.id, emp));
-
 const headEmployee = employees.find((emp) => emp.chiefId === null);

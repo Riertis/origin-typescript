@@ -1819,7 +1819,6 @@ chiefId - id сотрудника, который является началь�
 type User = {
   // Опишите поля
 };
-
 const employees: User[] = [
   { id: 59, name: 'Екатерина Смирнова', chiefId: 12, title: 'Chief Product and Technology Officer' },
   { id: 4, name: 'Николай Михайлов', chiefId: 34, title: 'Team Lead' },
